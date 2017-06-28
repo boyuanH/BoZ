@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Heatmap for BoZ</title>
+    <link rel="stylesheet" href="http://openlayers.org/en/v3.14.1/css/ol.css" type="text/css">
+<!-- local -->
+    <!-- link rel="stylesheet" href="lib/ol.css" type="text/css" -->
+    <script src="http://openlayers.org/en/v3.14.1/build/ol.js"></script>
+<!-- local -->
+    <!-- script src="lib/ol.js"></script -->
+
+
+  </head>
+  <body>
+    	<style type="text/css"">
+			html
+			{
+				width:100%;
+				height:100%;
+				margin:0px;
+				overflow:hidden;
+			}
+			body
+			{
+				width:100%;
+				height:100%;
+				margin:0px;
+				overflow-x:hidden;
+				overflow-y:scroll;
+			}
+        	#leftpane
+	        {
+    	    	float:left;
+        		width:200px;
+				height:100%;
+        		background-color:#EEEEEE;
+				overflow:hidden;
+	        }
+			#leftpane p
+			{
+				margin-left:20px;
+				margin-top :20px;
+			}
+
+			#leftpane li
+			{
+				width:40px;
+				background:#ccc;
+				margin-right:1px;
+				list-style-type:none;
+				font-size:10pt;
+				text-align:center;
+			    float: left;
+			}
+
+			.clearfloat
+			{
+				clear:left;
+			}
+    	    #map
+        	{
+				height:85%;
+        	}
+			#listcontainer
+			{
+				height:calc(100% - 320px);
+				overflow:scroll;
+			}
+			#dropdownlist1
+			{
+				width:160px;
+				margin-left:20px;
+			}
+			#calendar1
+			{
+				width:150px;
+				margin-left:20px;
+				margin-top:0px;
+			}
+			#calendar2
+			{
+				width:60px;
+				margin-left:20px;
+			}
+			#calendar3
+			{
+				width:60px;
+			}
+			#button1
+			{
+				width:80px;
+				height:30px;
+				margin-left:10px;
+				margin-top :10px;
+			}
+			#button2
+			{
+				width:80px;
+				height:30px;
+			}
+			#customcontrol{
+				position:absolute;
+			    top: 10px;
+			    left: 50px;
+				width: 100%;
+			    background-color: transparent;
+			}
+			#customcontrol .custombutton{
+			    font-size: 16px;
+			    width: 100px;
+			    padding: 5px;
+			    float: left;
+			}
+			#customcontrol .custombuttons{
+			    font-size: 16px;
+			    width: 30px;
+			    padding: 5px;
+			    float: left;
+			}
+			#customcontrol .custombuttont{
+			    font-size: 16px;
+			    width: 20px;
+			    padding: 5px;
+			    float: left;
+			    background-color: transparent;
+			}
+			#mapselectbox {
+				display:none;
+				position:absolute;
+				top:50px;
+				left:1em;
+				padding:3px;
+				border-radius:4px;
+				color:#fff;
+				background:rgba(0, 60, 136, 0.5);
+				z-index:100;
+			}
+			#floorselectbox {
+				display:none;
+				position:absolute;
+				top:50px;
+				left:10em;
+				padding:3px;
+				border-radius:4px;
+				color:#fff;
+				background:rgba(0, 60, 136, 0.5);
+				z-index:100;
+			}
+			#jumpselectbox {
+				display:none;
+				position:absolute;
+				top:50px;
+				left:16em;
+				padding:3px;
+				border-radius:4px;
+				color:#fff;
+				background:rgba(0, 60, 136, 0.5);
+				z-index:100;
+			}
+			#lonrat{
+				position:absolute;
+				right:2em;
+				bottom:2em;
+				color:#fff;
+				background-color:rgba(0, 60, 136, 0.5);
+			}
+			#idlonrattm{
+				position:absolute;
+				left:13em;
+				bottom:3.5em;
+				color:#fff;
+				background-color:rgba(0, 60, 136, 0.5);
+			}
+			.Lead{
+				float:left;
+				width:99.5%;
+				border-width:4;
+				border-style:solid;
+				border-color:#66f;
+				margin:0px 0px 3px 0px;
+				line-height: 110%;
+				padding:0;
+			}
+			.js-slider{
+				position:relative;
+				left:1em;
+				width:70%;
+				height:20px;
+			}
+			.js-slider div{
+				background:#ddd;
+				height:3px;
+				border:1px inset #aaa;
+				position:relative;
+				top:12px;
+				font-size:0px;
+			}
+			.js-slider input{
+				position:absolute;
+				width:15px;
+				height:20px;
+				display:block;
+			}
+			.table2{
+				width: 800px;
+				border-collapse: collapse;
+			}
+			.table2 td{
+				padding: 6px;
+				background-color: #fff;
+				border: 1px solid #b9b9b9;
+				text-align: center;
+			}
+    	</style>
+
+    <div id="map" class="map"></div>
+		<div id="mapselectbox">
+			<ul id="mapswitcher" style="list-style-type:none">
+				<li><label><input type="radio" name="layer1" value="0" > 地理院（標準地図）</label></li>
+				<li><label><input type="radio" name="layer1" value="1" checked/> OSM</label></li>
+			</ul>
+		</div>
+		<div id="floorselectbox">
+			<ul id="floorswitcher" style="list-style-type:none">
+				<li><label><input type="radio" name="layer2" value="0"/>中研1F</label></li>
+				<li><label><input type="radio" name="layer2" value="1"/>中研2F</label></li>
+				<li><label><input type="radio" name="layer2" value="2"/>中研3F</label></li>
+				<li><label><input type="radio" name="layer2" value="3"/>中研4F</label></li>
+				<li><label><input type="radio" name="layer2" value="4" checked/>BoZ</label></li>
+			</ul>
+		</div>
+		<div id="jumpselectbox">
+			<button class="custombutton" onclick="MoveToRd()">中研</button>
+			<button class="custombutton" onclick="MoveToBz()">BoZ</button>
+			<button class="custombutton" onclick="MoveToCV()">CEVA</button>
+		</div>
+		<div class="ol-unselectable ol-control" id="customcontrol">
+			<button class="custombutton" id="mapselector" onclick="ShowMapSelector()">MAP&nbsp;&raquo;</button>
+			<button class="custombutton" id="floorselector" onclick="ShowFloorSelector()">FLOOR&nbsp;&raquo;</button>
+			<button class="custombutton" id="jumpselector" onclick="ShowJumpSelector()">JUMP&nbsp;&raquo;</button>
+		</div>
+
+     <!--
+		<div id="lonrat"></div>
+		<div id="idlonrattm"></div>
+      -->
+
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- local -->
+     <!--
+		<script type="text/javascript" src="lib/jquery-1.11.0.min.js"></script>
+      -->
+
+    <form>
+	<div class="Lead">
+		<label  style="position: relative; float:left; margin-right: 0.1em; width:180px;" id="slider1o">Time:</label>
+		<div id="slider1" class="js-slider"  style="float:left;">
+			<div></div>
+			<input type="button" value="">
+		</div>
+		<div style="clear: both;"></div>
+		<input type="checkbox" id="chk_auto" value="Auto"  onClick="checkbox_auto()">Auto
+	</div>
+
+	<div class="Lead">
+		<input type="file" id="files" name="files[]" />
+		<div id="list"></div>
+            <label>Start Time:<label>
+            <input id="start_Hours" type="text" name="start_Hours" style="width:2%;padding:0px;font-size:15px;" onKeyup="this.value=this.value.replace(/[^0-9]+/i,'')" maxlength=2>
+            <label>:<label>
+            <input id="start_Min" type="text" name="start_Min" style="width:2%;padding:0px;font-size:15px;" onKeyup="this.value=this.value.replace(/[^0-9]+/i,'')" maxlength=2>
+            <label>:<label>
+            <input id="start_Sec" type="text" name="start_Sec" style="width:2%;padding:0px;font-size:15px;" onKeyup="this.value=this.value.replace(/[^0-9]+/i,'')" maxlength=2>
+            <label> End Time:<label>
+            <input id="end_Hours" type="text" name="end_Hours" style="width:2%;padding:0px;font-size:15px;" onKeyup="this.value=this.value.replace(/[^0-9]+/i,'')" maxlength=2>
+            <label>:<label>
+            <input id="end_Min" type="text" name="end_Min" style="width:2%;padding:0px;font-size:15px;" onKeyup="this.value=this.value.replace(/[^0-9]+/i,'')" maxlength=2>
+            <label>:<label>
+            <input id="end_Sec" type="text" name="end_Sec" style="width:2%;padding:0px;font-size:15px;" onKeyup="this.value=this.value.replace(/[^0-9]+/i,'')" maxlength=2>
+            <label>Time interval(sec):<label>
+            <input id="time_interval" type="text" name="time_interval" style="width:5%;padding:0px;font-size:15px;" onKeyup="this.value=this.value.replace(/[^0-9]+/i,'')">
+            <label>Time period(sec):<label>
+            <input id="time_period" type="text" name="time_period" style="width:5%;padding:0px;font-size:15px;" onKeyup="this.value=this.value.replace(/[^0-9]+/i,'')">
+            <input id="button_times" type="button" name="button_times" onClick="button_time_set()" value="set" >
+
+	</div>
+
+	<div class="Lead">
+		<label  style="position: relative; float:left; margin-right: 0.1em; width:150px;" id="radius_size">
+			radius size :</label>
+      <input id="radius" type="range" min="1" max="50" step="1" value="5"/>
+     <!--
+      <label>blur size</label>
+      <input id="blur" type="range" min="1" max="50" step="1" value="15"/> 
+      -->
+	</div>
+
+<div class="Lead">
+      <select id="type_poly">
+        <option name="None" value="None">None</option>
+        <option name="Polygon1" value="Polygon1">Polygon1(Red)</option>
+        <option name="Polygon2" value="Polygon2">Polygon2(Green)</option>
+      </select>
+      <div></div>
+       <label>Time period(sec):<label>
+       <input id="time_period_poly" type="text" name="time_period_poly" style="width:5%;padding:0px;font-size:15px;" onKeyup="this.value=this.value.replace(/[^0-9]+/i,'')">
+     <input id="button_polyc" type="button" name="button_polyc" onClick="button_poly_calc()" value="calc" >
+     <input id="button_polyd" type="button" name="button_polyd" onClick="button_poly_del()" value="delete" >
+      <div></div>
+      <label  id="msg_poly_lot"></label>
+      <label  id="msg_poly_area"></label>
+     <table id="table_poly" class="table2" border=1>
+     </table>
+</div>
+
+<div class="Lead">
+            <label>Marker (Longitude, Latitude, Orientation)<label>
+            <input id="mak_up" type="text" name="mak_up" size="15" onKeyup="this.value=this.value.replace(/[^0-9\.]+/i,'')">
+            <input id="mak_lo" type="text" name="mak_lo" size="15" onKeyup="this.value=this.value.replace(/[^0-9\.]+/i,'')">
+            <input id="mak_or" type="text" name="mak_or" size="15" onKeyup="this.value=this.value.replace(/[^0-9\.]+/i,'')">
+            <input id="button_makset" type="button" name="button_makset" onClick="button_mak_set()"  value="set" >
+            <input id="button_makdel" type="button" name="button_makdel" onClick="button_mak_del()" value="delete" >
+</div>
+
+<div class="Lead">
+            <label>Angle of view: (Upper, Lower)<label>
+            <input id="ang_up" type="text" name="ang_up" placeholder="18" size="10" onKeyup="this.value=this.value.replace(/[^0-9\.]+/i,'')">
+            <input id="ang_lo" type="text" name="ang_lo" placeholder="22" size="10" onKeyup="this.value=this.value.replace(/[^0-9\.]+/i,'')">
+            <label>Distance(m) : (Near, Far)<label>
+            <input id="de_ri" type="text" name="de_ri" placeholder="2" size="10" onKeyup="this.value=this.value.replace(/[^0-9\.]+/i,'')">
+            <input id="de_le" type="text" name="de_le" placeholder="35" size="10" onKeyup="this.value=this.value.replace(/[^0-9\.]+/i,'')">
+            <input id="button_lines" type="button" name="button_lines" onClick="button_line_set()"  value="set" >
+            <input id="button_lined" type="button" name="button_lined" onClick="button_line_del()" value="delete" >
+</div>
+<div id="set_time_dff" class="Lead">
+            <label>Time difference(h) : <label>
+            <input id="tm_df" type="text" name="tm_df" placeholder="-8" size="10" onKeyup="this.value=this.value.replace(/[^0-9\.\-]+/i,'')">
+            <input id="button_timediffs" type="button" name="button_timediffs" onClick="button_timediff_set()"  value="set" >
+</div>
+
+<div id="msg" class="Lead"></div>
+<div id="msg_fileno" class="Lead"></div>
+
+    </form>
+    <script>
+			var map;										//マップオブジェクト
+        var maplayer=[];                                //マップレイヤー
+			var floorlayer=[];								//フロアレイヤー
+			var snapsource=null;
+			var positionlayer=new Object();					//測位データレイヤー（KMLベクトル、ヒートマップ）
+			var heatnum = 0;
+
+			var heattime = 2000;
+			var timer_1;
+
+//        var blur = document.getElementById('blur');
+			var radius = document.getElementById('radius');
+			var markerA;
+			var Lon_maker;
+			var Lat_maker;
+			var Ang_maker;
+			var onMaker = 0;
+			var lineVector_l;
+			var Lon_m; // hubeny
+			var Lat_m;
+			var map_ang = 180;
+
+			var str3_input_up = 18;
+			var str3_input_lo = 22;
+			var str3_input_dele = 35;
+			var str3_input_deri = 2;
+
+// for csv
+			var tm=[];
+			var frameNo=[];
+			var pointFeatures=[];
+			var isFeatures=[];
+			var time_intvl_length = 0;
+			var all_time = 0;
+			var file_length = 0;
+			var startTime;
+			var endTime;
+			var intervalTime;
+			var periodTime;
+			var samplingTime = 0;
+			var time_diff = -8;
+
+			var file_output = [];
+
+// time slider
+		var slider = document.getElementById('slider1');
+
+		var input = slider.getElementsByTagName('input')[0];
+		var dragging = false;
+		var value_0 = 0;// 初期位置
+		var width = input.clientWidth / 2;
+
+		var set_value = function (){
+			var length = time_intvl_length;
+			var rect = slider.getBoundingClientRect();
+			var value_max =  Math.round(rect.right - rect.left);
+			var value_step, value_file, value_slide;
+
+			if(length > 1){
+				value_step = value_max / (length - 1);
+				value_file = Math.round(value_0 / value_step);
+				value_slide = Math.round(value_file * value_step);
+			}else{
+				value_file = 0;
+				value_slide = 0;
+				value_0 = 0;
+			}
+
+			if(length > 0){
+				dynamicHeatLayer1(value_file);
+			}
+
+
+			// つまみのサイズ(input.clientWidth)だけ位置を調整
+			input.style.left = (value_slide - input.clientWidth/2) + 'px';
+
+		};
+
+		set_value();
+
+		// 目盛り部分をクリックしたとき
+		slider.onclick = function(evt){
+			dragging = true;
+			document.onmousemove(evt);
+			document.onmouseup();
+		};
+		// ドラッグ開始
+		input.onmousedown = function(evt){
+			dragging = true;
+			return false;
+		};
+		// ドラッグ終了
+		document.onmouseup = function(evt){
+			if (dragging) {
+				dragging = false;
+			}
+		};
+		document.onmousemove = function(evt){
+			if(dragging){
+				// ドラッグ途中
+				if(!evt){
+					evt = window.event;
+				}
+				var left = evt.clientX;
+				var rect = slider.getBoundingClientRect();
+				// マウス座標とスライダーの位置関係で値を決める
+				value_0 = Math.round(left - rect.left - width);
+
+				// スライダーからはみ出したとき
+				if (value_0 < 0) {
+					value_0 = 0;
+				} else if (value_0 > slider.clientWidth) {
+					value_0 = slider.clientWidth;
+				}
+				set_value();
+				return false;
+			}
+		};
+
+
+
+// ベースの地図作成（地理院地図）
+      var mapsourceattribution=new ol.Attribution({
+          html: "<a href='http://portal.cyberjapan.jp/help/termsofuse.html' target='_blank'>国土地理院</a>"
+      })
+
+      maplayer[0]=new ol.layer.Tile({
+          source: new ol.source.XYZ({
+              attributions: [mapsourceattribution],
+                url: "http://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png",
+              projection: "EPSG:3857"
+          })
+        })
+      maplayer[0].setVisible(false);
+      document.getElementsByName("layer1")[1].checked = true;
+      maplayer[1]=new ol.layer.Tile({
+          source: new ol.source.OSM()
+      })
+      maplayer[1].setVisible(true);
+
+
+
+//
+      map = new ol.Map({
+        target: "map",
+          renderer: "canvas",
+          layers: [maplayer[0],maplayer[1]],
+          view: view=new ol.View({
+              center: ol.proj.transform([-0.6940961638553076, 52.50398587968243], 'EPSG:4326', 'EPSG:3857'),
+              zoom: 18,
+            rotation: 5.156592987079622
+          })
+      }); 
+
+
+
+			map.addControl(new ol.control.ScaleLine());
+			map.addControl(new ol.control.ZoomSlider());
+
+
+            // フロアマップ作成
+			floorlayer[0]=new ol.layer.Tile({
+                opacity: 0.95,
+				source: new ol.source.XYZ({
+					url: "http://165.96.242.70/map/rd1/{z}/{x}/{y}.png",
+//					url: "map/rd1/{z}/{x}/{y}.png", //local
+		        	projection: "EPSG:3857"
+				})
+          	})
+            map.addLayer(floorlayer[0]);
+			floorlayer[0].setVisible(false);
+			floorlayer[1]=new ol.layer.Tile({
+                opacity: 0.95,
+				source: new ol.source.XYZ({
+					url: "http://165.96.242.70/map/rd2/{z}/{x}/{y}.png",
+//					url: "map/rd2/{z}/{x}/{y}.png", //local
+		        	projection: "EPSG:3857"
+				})
+          	})
+            map.addLayer(floorlayer[1]);
+			floorlayer[1].setVisible(false);
+			floorlayer[2]=new ol.layer.Tile({
+                opacity: 0.95,
+				source: new ol.source.XYZ({
+					url: "http://165.96.242.70/map/rd3/{z}/{x}/{y}.png",
+//					url: "map/rd2/{z}/{x}/{y}.png", //local
+		        	projection: "EPSG:3857"
+				})
+          	})
+            map.addLayer(floorlayer[2]);
+			floorlayer[2].setVisible(false);
+			floorlayer[3]=new ol.layer.Tile({
+                opacity: 0.95,
+				source: new ol.source.XYZ({
+					url: "http://165.96.242.70/map/rd4/{z}/{x}/{y}.png",
+//					url: "map/rd2/{z}/{x}/{y}.png", //local
+		        	projection: "EPSG:3857"
+				})
+          	})
+            map.addLayer(floorlayer[3]);
+			floorlayer[3].setVisible(false);
+			document.getElementsByName("layer2")[4].checked = true;
+			floorlayer[4]=new ol.layer.Tile({
+                opacity: 0.95,
+				source: new ol.source.XYZ({
+					url: "http://10.62.23.151/map/{z}/{x}/{y}.png",
+//					url: "map/{z}/{x}/{y}.png", //local
+		        	projection: "EPSG:3857"
+				})
+          	})
+            map.addLayer(floorlayer[4]);
+			floorlayer[4].setVisible(true);
+
+// ヒートマップ作成
+			var dyndata = new ol.source.Vector();
+
+			var dynHeatMapLayer = new ol.layer.Heatmap({
+				source: dyndata,
+				blur: parseInt(radius.value, 10)*2,
+				radius: parseInt(radius.value, 10)
+			});
+			map.addLayer(dynHeatMapLayer);
+
+			function dynamicHeatLayer1(timeNumber){
+				var i;
+				var slid_start_FileNo = -1;
+				var slid_end_FileNo;
+				var slid_start = new Date(startTime);
+
+				slid_start.setSeconds(slid_start.getSeconds() + timeNumber*intervalTime);
+
+				var slid_end = new Date(slid_start);
+				slid_end.setSeconds(slid_end.getSeconds() + periodTime);
+//				if(slid_end > endTime) slid_end = endTime;
+
+				document.getElementById("slider1o").innerHTML =  'Time ：' + date2str(slid_start)
+																+ ' - '+ time2str(slid_end) ;
+
+				for(i=0;i<=file_length;i++){
+					if((tm[i]<slid_start)&(isFeatures[i])){
+						dyndata.removeFeature(pointFeatures[i]);
+						isFeatures[i]=false;
+					}
+					if((tm[i]>=slid_end)&(isFeatures[i])){
+						dyndata.removeFeature(pointFeatures[i]);
+						isFeatures[i]=false;
+					}
+					if((tm[i]>=slid_start)&(tm[i]<slid_end)&(!isFeatures[i])){
+						dyndata.addFeature(pointFeatures[i]);
+						isFeatures[i]=true;
+					}
+					if((tm[i]>=slid_start) && (slid_start_FileNo == -1)) slid_start_FileNo = frameNo[i];
+					if(tm[i]<slid_end) slid_end_FileNo = frameNo[i];
+				}
+
+				document.getElementById("msg_fileno").innerHTML =  'nFrameNo:' + slid_start_FileNo 
+																				+ ' - ' + slid_end_FileNo;
+
+
+			}
+
+			checkbox_auto();
+			function checkbox_auto() {
+				if(document.getElementById("chk_auto").checked){
+
+//					document.getElementById("button_times").disabled = true; 
+//					document.getElementById("files").disabled = true; 
+
+					var fsize = time_intvl_length; 
+					var rect = slider.getBoundingClientRect();
+					var value_max =  Math.round(rect.right - rect.left);
+					if((fsize > 1) ) heatnum = Math.round(value_0 / (value_max / (fsize - 1)));
+
+					timer_1 = setInterval(ShowAutoHeatMap, heattime);
+
+
+				}else{
+					var fsize = time_intvl_length;
+					var rect = slider.getBoundingClientRect();
+					var value_max =  Math.round(rect.right - rect.left);
+
+					clearInterval(timer_1);
+
+					if(fsize > 1) value_0 = (value_max / (fsize - 1)) * heatnum;
+					set_value();
+
+//					document.getElementById("button_times").disabled = false; 
+//					document.getElementById("files").disabled = false; 
+
+				}
+			}
+
+
+			function ShowAutoHeatMap() {
+				var fsize = time_intvl_length; 
+				var rect = slider.getBoundingClientRect();
+				var value_max =  Math.round(rect.right - rect.left);
+				var value_step, value_slide = 0;
+				var i;
+
+				if(fsize == 0){
+//							document.getElementById("msgdd").innerHTML =  'list ：null' ;
+				}else if((heatnum + 1) > fsize){
+				    heatnum = 0;
+				    heattime = 1000;
+					document.getElementById("slider1o").innerHTML =  'Time ：' ;
+
+					for(i=0;i<=file_length;i++){
+						if(isFeatures[i]){
+							dyndata.removeFeature(pointFeatures[i]);
+							isFeatures[i]=false;
+						}
+					}
+
+				}else{
+					dynamicHeatLayer1(heatnum);
+
+					if((fsize > 1) ){
+						value_step = value_max / (fsize - 1);
+						value_slide = Math.round(heatnum * value_step);
+					}
+					// つまみのサイズ(input.clientWidth)だけ位置を調整
+					input.style.left = (value_slide - input.clientWidth/2) + 'px';
+
+					heatnum += 1;
+					heattime = 1000;
+				}
+			}
+
+
+			document.getElementById("radius_size").innerHTML = 'radius size :' + radius.value ;
+
+			radius.addEventListener('change', function() {
+				document.getElementById("radius_size").innerHTML = 'radius size :' + radius.value ;
+				dynHeatMapLayer.setRadius(parseInt(radius.value, 10));
+				dynHeatMapLayer.setBlur(parseInt(radius.value, 10)*2);
+			});
+
+
+
+			//マウス位置の緯度経度表示
+		    map.on('pointermove', function(evt) {
+				var coordinate = evt.coordinate;
+				var stringifyFunc = ol.coordinate.createStringXY(10);
+				var str;
+
+				var str2 = ol.proj.transform(map.getView().getCenter(), 'EPSG:3857', 'EPSG:4326');
+				var str3 = map.getView().getZoom();
+				var str4 = map.getView().getRotation();
+
+				document.getElementById("msg").innerHTML  = str2[0]  + ', '+ str2[1]  + ', ' 
+														+ str3 + ', '+  str4 ;
+
+		    });
+
+
+			//地図選択
+			function ShowMapSelector(){
+				if(jQuery('#mapselectbox').css('display')=='none'){
+					jQuery('#mapselectbox').css('display','block');
+					$("#mapselector").html("MAP&nbsp;&laquo;");
+				}
+				else{
+					jQuery('#mapselectbox').css('display','none');
+					$("#mapselector").html("MAP&nbsp;&raquo;");
+				}
+			}
+
+			//フロア選択
+			function ShowFloorSelector(){
+				if(jQuery('#floorselectbox').css('display')=='none'){
+					jQuery('#floorselectbox').css('display','block');
+					$("#floorselector").html("FLOOR&nbsp;&laquo;");
+				}
+				else{
+					jQuery('#floorselectbox').css('display','none');
+					$("#floorselector").html("FLOOR&nbsp;&raquo;");
+				}
+			}
+
+			//ジャンプ選択
+			function ShowJumpSelector(){
+				if(jQuery('#jumpselectbox').css('display')=='none'){
+					jQuery('#jumpselectbox').css('display','block');
+					$("#jumpselector").html("JUMP&nbsp;&laquo;");
+				}
+				else{
+					jQuery('#jumpselectbox').css('display','none');
+					$("#jumpselector").html("JUMP&nbsp;&raquo;");
+				}
+			}
+
+			jQuery("#mapswitcher input[name=layer1]").change(function(){
+				var checkedLayer = jQuery('#mapswitcher input[name=layer1]:checked').val();
+				for (i = 0, ii = maplayer.length; i < ii; ++i) maplayer[i].setVisible(i==checkedLayer);
+			} );
+
+			jQuery("#floorswitcher input[name=layer2]").change(function(){
+				var checkedLayer = jQuery('#floorswitcher input[name=layer2]:checked').val();
+				for (i = 0, ii = floorlayer.length; i < ii; ++i) floorlayer[i].setVisible(i==checkedLayer);
+			} );
+
+
+			//測位データレイヤーの削除
+			function Removepositionlayer(hashin){
+				map.removeLayer(positionlayer[hashin]);
+				delete positionlayer[hashin];
+			}
+
+			//ジャンプ
+			function MoveToRd() {
+				var radioList1 = document.getElementsByName("layer1");
+				var radioList2 = document.getElementsByName("layer2");
+				var checkedLayer1 = 0;
+				var checkedLayer2 = 1;
+
+		        mapMove(139.594205,35.537473,-0.5,18);
+
+				radioList1[checkedLayer1].checked = true;
+				for (i = 0, ii = maplayer.length; i < ii; ++i) maplayer[i].setVisible(i==checkedLayer1);
+
+				radioList2[checkedLayer2].checked = true;
+				for (i = 0, ii = floorlayer.length; i < ii; ++i) floorlayer[i].setVisible(i==checkedLayer2);
+		    }
+			function MoveToBz(){
+				var radioList1 = document.getElementsByName("layer1");
+				var radioList2 = document.getElementsByName("layer2");
+				var checkedLayer1 = 1;
+				var checkedLayer2 = 4;
+
+				mapMove(4.2569479549,51.4961659698,2.16944,17);
+
+				radioList1[checkedLayer1].checked = true;
+				for (i = 0, ii = maplayer.length; i < ii; ++i) maplayer[i].setVisible(i==checkedLayer1);
+
+				radioList2[checkedLayer2].checked = true;
+				for (i = 0, ii = floorlayer.length; i < ii; ++i) floorlayer[i].setVisible(i==checkedLayer2);
+
+			}
+			function MoveToCV(){
+				var radioList1 = document.getElementsByName("layer1");
+				var radioList2 = document.getElementsByName("layer2");
+				var checkedLayer1 = 1;
+				var checkedLayer2 = 4;
+
+				mapMove(-0.6940961638553076, 52.50398587968243, 5.156592987079622, 18);
+
+				radioList1[checkedLayer1].checked = true;
+				for (i = 0, ii = maplayer.length; i < ii; ++i) maplayer[i].setVisible(i==checkedLayer1);
+
+				radioList2[checkedLayer2].checked = true;
+				for (i = 0, ii = floorlayer.length; i < ii; ++i) floorlayer[i].setVisible(i==checkedLayer2);
+
+			}
+
+			//指定緯度経度に移動
+			function mapMove(lon, lat, rotation, zoom) {
+			    //各種項目のリセット
+			    view.setCenter(ol.proj.transform([lon, lat], "EPSG:4326", "EPSG:3857"));
+			    view.setRotation(rotation);
+			    view.setZoom(zoom);
+			}
+
+//file
+			document.getElementById('files').value ="";
+			document.getElementById('start_Hours').value ="";
+			document.getElementById('start_Min').value ="";
+			document.getElementById('start_Sec').value ="";
+			document.getElementById('end_Hours').value ="";
+			document.getElementById('end_Min').value ="";
+			document.getElementById('end_Sec').value ="";
+			document.getElementById("files").disabled = false; 
+			document.getElementById("button_times").disabled = true; 
+			document.getElementById("type_poly").disabled = true; 
+			document.getElementById("button_polyc").disabled = true; 
+			document.getElementById("button_polyd").disabled = true; 
+			document.getElementById("button_timediffs").disabled = true; 
+
+			document.getElementById('files').addEventListener('change', function(evt) {
+				document.getElementById("button_times").disabled = true; 
+				document.getElementById("files").disabled = true; 
+				document.getElementById("type_poly").disabled = true; 
+				document.getElementById("button_polyc").disabled = true; 
+				document.getElementById("button_polyd").disabled = true; 
+				document.getElementById("button_timediffs").disabled = true; 
+
+				var files = evt.target.files; // FileList object
+				var i;
+				var j = 0;
+
+				var fr=new FileReader();
+				try{
+					fr.readAsText(files[0]);
+				}catch(e){
+					document.getElementById("button_times").disabled = false; 
+					document.getElementById("files").disabled = false; 
+					document.getElementById("type_poly").disabled = false; 
+					document.getElementById("button_polyc").disabled = false; 
+					document.getElementById("button_polyd").disabled = false; 
+					document.getElementById("button_timediffs").disabled = false; 
+					return;
+				}
+
+				if(file_length != 0){
+					for(i=0;i<=file_length;i++){
+						if(isFeatures[i]){
+							dyndata.removeFeature(pointFeatures[i]);
+							isFeatures[i]=false;
+						}
+					}
+				}
+
+				tm = [];
+				pointFeatures = [];
+				isFeatures = [];
+				frameNo = [];
+
+				if ((files[0].type == "text/csv") || (files[0].type == "application/vnd.ms-excel")|| (files[0].type == "")) {
+					fr.onload=function(ev){
+						var l=fr.result.split('\n');
+						for(i=0;i<l.length;i++){
+							if(l[i]){				//空行スキップ
+								var d=l[i].split(',');
+								if(d[0] == '#'){ //コメント行
+									if(d[1] == '1'){ //、カメラ位置の設定
+										Lon_maker = d[2];
+										document.getElementById('mak_up').value = d[2];
+										Lat_maker = d[3];
+										document.getElementById('mak_lo').value = d[3];
+										Ang_maker = d[4];
+										document.getElementById('mak_or').value = d[4];
+									}
+									if(d[1] == '6'){ //、サンプリング
+										samplingTime = parseFloat(d[2]);
+									}
+								}else{
+									var lon2=parseFloat(d[0]);
+									var lat2=parseFloat(d[1]);
+									tm[j]=new Date(d[2].substring(0,19));
+									// 時差調整
+										time_diff = parseFloat(document.getElementById('tm_df').value, 10);
+										if(isNaN(time_diff) )   time_diff = -8 ;
+									if(time_diff != 0) tm[j].setHours(tm[j].getHours() + time_diff);
+									coord =ol.proj.transform([lon2, lat2], 'EPSG:4326', 'EPSG:3857');
+									lonLat= new ol.geom.Point(coord);
+									pointFeature=new ol.Feature({
+										geometry: lonLat,
+										weight: 0.2 // e.g. temperature
+									});
+									pointFeatures[j] = pointFeature;
+									isFeatures[j] = false;
+									frameNo[j] =parseInt(d[3]);
+									j = j + 1;
+								}
+							}
+						}
+					file_length = j - 1;
+					startTime = new Date(tm[0]);
+					startTime.setSeconds(0);
+					endTime   = new Date(tm[file_length]);
+					if(d[2].substring(20,23) != 0){
+						endTime.setSeconds(endTime.getSeconds() + 1);
+					}
+
+					get_timeparm_intper();
+					
+					set_value();
+
+					file_set_timeparm();
+					list_set_timeparm();
+
+					button_mak_set();
+					button_line_set();
+
+                    // Polygon
+					if(document.getElementById('time_period_poly').value == ""){
+						document.getElementById('time_period_poly').value = 60;
+					}
+					document.getElementById("msg_poly_lot").innerHTML =  '' ;
+					document.getElementById("msg_poly_area").innerHTML =  '' ;
+					var table = document.getElementById("table_poly");
+					while( table.rows[ 0 ] ) table.deleteRow( 0 ); //削除
+
+					}
+				}else{
+						document.getElementById("list").innerHTML =  'unexpected file format error.' + files[0].type;
+						time_intvl_length = 0;
+						file_length = 0;
+				}
+
+				document.getElementById("button_times").disabled = false; 
+				document.getElementById("files").disabled = false; 
+				document.getElementById("type_poly").disabled = false; 
+				document.getElementById("button_polyc").disabled = false; 
+				document.getElementById("button_polyd").disabled = false; 
+				document.getElementById("button_timediffs").disabled = false; 
+
+			}, false);
+
+
+			function button_time_set() {
+					get_timeparm();
+					set_value();
+					file_set_timeparm();
+					list_set_timeparm();
+			}
+
+			function date2str(d){
+				return d.getFullYear()+"/"+("0"+(d.getMonth() + 1)).slice(-2) + "/" + ("0"+d.getDate()).slice(-2)+" "+("0"+d.getHours()).slice(-2) + ":" + ("0"+d.getMinutes()).slice(-2) + ":" + ("0"+d.getSeconds()).slice(-2);
+			}
+
+			function time2str(d){
+				return ("0"+d.getHours()).slice(-2) + ":" + ("0"+d.getMinutes()).slice(-2) + ":" + ("0"+d.getSeconds()).slice(-2);
+			}
+
+			function get_timeparm(){
+				var get_startTime = new Date(startTime);
+				var get_endTime = new Date(endTime);
+
+				get_startTime.setHours(parseInt(document.getElementById('start_Hours').value, 10));
+				get_startTime.setMinutes(parseInt(document.getElementById('start_Min').value, 10));
+				get_startTime.setSeconds(parseInt(document.getElementById('start_Sec').value, 10));
+				if((startTime < get_startTime) && (get_startTime < endTime)) startTime = get_startTime;
+
+				get_endTime.setHours(parseInt(document.getElementById('end_Hours').value, 10));
+				get_endTime.setMinutes(parseInt(document.getElementById('end_Min').value, 10));
+				get_endTime.setSeconds(parseInt(document.getElementById('end_Sec').value, 10));
+				if((endTime > get_endTime) && (get_endTime > startTime) ) endTime = get_endTime;
+
+				get_timeparm_intper();
+			}
+
+			function get_timeparm_intper(){
+				if(document.getElementById('time_interval').value == ""){
+					intervalTime = 60;
+				}else{
+					intervalTime = parseInt(document.getElementById('time_interval').value, 10);
+				}
+				if(document.getElementById('time_period').value == ""){
+					periodTime = 60;
+				}else{
+					periodTime = parseInt(document.getElementById('time_period').value, 10);
+				}
+
+				all_time = (endTime.getTime() - startTime.getTime())/1000;
+				time_intvl_length = Math.ceil(all_time/intervalTime);
+
+			}
+
+
+			function list_set_timeparm(){
+				document.getElementById("list").innerHTML  = 'Set parameters:: Time:' + date2str(startTime)  
+														+ ' - '+ time2str(endTime) + ", All:" 
+														+ all_time + '(sec),/ Interval:' 
+														+ intervalTime + '(sec),/ Period:'+  periodTime + '(sec)';
+			}
+			function file_set_timeparm(){
+				document.getElementById('start_Hours').value = ("0"+startTime.getHours()).slice(-2);
+				document.getElementById('start_Min').value = ("0"+startTime.getMinutes()).slice(-2);
+				document.getElementById('start_Sec').value =  ("0"+startTime.getSeconds()).slice(-2);
+				document.getElementById('end_Hours').value =  ("0"+endTime.getHours()).slice(-2);
+				document.getElementById('end_Min').value = ("0"+endTime.getMinutes()).slice(-2);
+				document.getElementById('end_Sec').value = ("0"+endTime.getSeconds()).slice(-2);
+				document.getElementById('time_interval').value = intervalTime;
+				document.getElementById('time_period').value = periodTime;
+			}
+
+//marker
+			function convertCoordinate(longitude, latitude) {
+			  return ol.proj.transform([longitude, latitude], "EPSG:4326","EPSG:900913");
+			}
+
+			function makeMarkerOverlay(imgSrc, coordinate) {
+				var imgElement = document.createElement('img');
+				imgElement.setAttribute('src', imgSrc);
+				var markerOverlay = new ol.Overlay({
+					element: imgElement,
+					position: coordinate,
+					positioning: 'bottom-center'
+				});
+				return markerOverlay;
+			}
+
+			function button_mak_set() {
+				Lon_maker = parseFloat(document.getElementById('mak_up').value, 10);
+				Lat_maker = parseFloat(document.getElementById('mak_lo').value, 10);
+				Ang_maker = parseFloat(document.getElementById('mak_or').value, 10);
+				hubeny(Lat_maker);
+
+				onMaker = 1;
+
+				markerA = makeMarkerOverlay('http://dev.openlayers.org/img/marker.png',
+//				markerA = makeMarkerOverlay('lib/marker.png', // local
+													 convertCoordinate(Lon_maker ,Lat_maker));
+				map.addOverlay(markerA);	
+//							document.getElementById("msgdd").innerHTML =  'list ：null' + Lon_maker ;
+			}
+
+			function button_mak_del() {
+
+				onMaker = 0;
+				Lon_maker = -1;
+				Lat_maker = -1;
+				Ang_maker = -1;
+
+				document.getElementById('mak_up').value = '';
+				document.getElementById('mak_lo').value = '';
+				document.getElementById('mak_or').value = '';
+
+				map.getOverlays().getArray().slice(0).forEach(function(overlay) {
+					map.removeOverlay(overlay);
+				});
+
+				button_line_del();
+			}
+
+
+
+//画角
+			function hubeny(str2) {
+				var dLamda = Math.PI / 180;
+				var Rx = 6378137;                                                       //赤道半径（ｍ）
+				var E2 = 0.00669437999019758000;                                        //離心率（ｅ＾２）
+
+				var inLatitude = str2;
+
+				//子午線・卯酉線曲率半径の分母
+				var W = Math.sqrt(1 - E2 *  Math.pow(Math.sin(inLatitude * Math.PI / 180), 2));    
+				var M = dLamda * (Rx * (1 - E2)) / (W * W * W);                         //子午線曲率半径
+				var N = (Rx * Math.cos(inLatitude * Math.PI / 180) * dLamda) / W;                 //卯酉線曲率半径
+
+				Lat_m  = 1 / M;
+				Lon_m = 1 / N;
+
+			}
+
+
+//画角
+			function addLine_l() {
+			    var lineStrArray = new Array();
+			    var coordArray = new Array();
+				var Lon_set_n;
+				var Lat_set_n;
+				var str3_ga = (Ang_maker + map_ang) % 360 + 180;
+				var str3_i;
+
+				if(isNaN(str3_input_up) )   str3_input_up = 18 ;
+				if(isNaN(str3_input_lo) )   str3_input_lo = 22 ;
+				if(isNaN(str3_input_deri) ) str3_input_deri = 2 ;
+				if(isNaN(str3_input_dele) ) str3_input_dele = 35 ;
+
+			    map.removeLayer(lineVector_l);
+
+				var str3_input_up_ga = str3_ga - str3_input_up;
+				var str3_input_lo_ga = str3_ga + str3_input_lo;
+
+				//3m
+				str3_i = str3_input_lo_ga;
+				while(str3_i > str3_input_up_ga){
+					Lon_set_n = Lon_maker + ((str3_input_deri * Math.cos(str3_i * Math.PI / 180)) * Lon_m);;
+					Lat_set_n = Lat_maker + ((str3_input_deri * Math.sin(str3_i * Math.PI / 180)) * Lat_m);;
+				    coordArray.push([Lon_set_n, Lat_set_n]);
+					str3_i -= 10;
+				}
+				Lon_set_n = Lon_maker + ((str3_input_deri * Math.cos(str3_input_up_ga * Math.PI / 180)) * Lon_m);;
+				Lat_set_n = Lat_maker + ((str3_input_deri * Math.sin(str3_input_up_ga * Math.PI / 180)) * Lat_m);;
+				coordArray.push([Lon_set_n, Lat_set_n]);
+
+				//30m
+				str3_i = str3_input_up_ga;
+				while(str3_i < str3_input_lo_ga){
+					Lon_set_n = Lon_maker + ((str3_input_dele * Math.cos(str3_i * Math.PI / 180)) * Lon_m);;
+					Lat_set_n = Lat_maker + ((str3_input_dele * Math.sin(str3_i * Math.PI / 180)) * Lat_m);;
+				    coordArray.push([Lon_set_n, Lat_set_n]);
+					str3_i += 5;
+				}
+				Lon_set_n = Lon_maker + ((str3_input_dele * Math.cos(str3_input_lo_ga * Math.PI / 180)) * Lon_m);;
+				Lat_set_n = Lat_maker + ((str3_input_dele * Math.sin(str3_input_lo_ga * Math.PI / 180)) * Lat_m);;
+				coordArray.push([Lon_set_n, Lat_set_n]);
+
+				Lon_set_n = Lon_maker + ((str3_input_deri * Math.cos(str3_input_lo_ga * Math.PI / 180)) * Lon_m);;
+				Lat_set_n = Lat_maker + ((str3_input_deri * Math.sin(str3_input_lo_ga * Math.PI / 180)) * Lat_m);;
+				coordArray.push([Lon_set_n, Lat_set_n]);
+
+
+			    for (i=0; i<(coordArray.length-1); i++) {
+			        lineStrArray.push([coordArray[i], coordArray[i+1]]);
+			    }
+
+			    var lineStrings = new ol.geom.MultiLineString([]);
+			    lineStrings.setCoordinates(lineStrArray);
+
+			    var vectorFeature = new ol.Feature(
+			        lineStrings.transform('EPSG:4326', 'EPSG:3857')
+			    );
+
+			    var vectorSource  = new ol.source.Vector({
+			        features: [vectorFeature]
+			    });
+
+			// 中心設定用の vector layer の作成
+			    lineVector_l = new ol.layer.Vector({
+			        source: vectorSource,
+			        style: new ol.style.Style({
+			            stroke: new ol.style.Stroke({ color: '#FF00FF', width: 2 }),//#FF00FF
+			        })
+			    });
+
+			    // vector layer の追加
+			    map.addLayer(lineVector_l);
+			}
+			function button_line_set() {
+				if(onMaker == 1){
+					str3_input_up = parseFloat(document.getElementById('ang_up').value, 10);
+					str3_input_lo = parseFloat(document.getElementById('ang_lo').value, 10);
+					str3_input_deri = parseFloat(document.getElementById('de_ri').value, 10);
+					str3_input_dele = parseFloat(document.getElementById('de_le').value, 10);
+					addLine_l();
+				}
+			}
+			function button_line_del() {
+				map.removeLayer(lineVector_l);
+				document.getElementById('ang_up').value  = '';
+				document.getElementById('ang_lo').value  = '';
+				document.getElementById('de_ri').value  = '';
+				document.getElementById('de_le').value  = '';
+			}
+
+
+
+
+//////// polygon
+      document.getElementsByName("None")[0].selected = true;
+
+      var source_poly1 = new ol.source.Vector({wrapX: false});
+      var source_poly2 = new ol.source.Vector({wrapX: false});
+
+      var vector_poly1 = new ol.layer.Vector({
+        source: source_poly1,
+        style: new ol.style.Style({
+          fill: new ol.style.Fill({
+            color: 'rgba(255, 204, 204, 0.4)'
+          }),
+          stroke: new ol.style.Stroke({
+            color: '#FF3333',
+            width: 3
+          })
+       })
+      });
+      var vector_poly2 = new ol.layer.Vector({
+        source: source_poly2,
+        style: new ol.style.Style({
+          fill: new ol.style.Fill({
+            color: 'rgba(127, 255, 212, 0.3)'
+          }),
+          stroke: new ol.style.Stroke({
+            color: '#006400',
+            width: 3
+          })
+       })
+      });
+
+      var maxPoints = 10;
+      var draw1 = new ol.interaction.Draw({
+            source: source_poly1,
+            type: ('Polygon'),
+            maxPoints: maxPoints
+      });
+      var draw2 = new ol.interaction.Draw({
+            source: source_poly2,
+            type: ('Polygon'),
+            maxPoints: maxPoints
+      });
+
+      var typeSelect = document.getElementById('type_poly');
+
+      function addInteraction() {
+        var value = typeSelect.value;
+         map.removeInteraction(draw1);
+         map.removeInteraction(draw2);
+
+        if (value == 'Polygon1') {
+          map.removeLayer(vector_poly1);
+          map.addLayer(vector_poly1);
+          map.addInteraction(draw1);
+        }
+        else if (value == 'Polygon2') {
+          map.removeLayer(vector_poly2);
+          map.addLayer(vector_poly2);
+          map.addInteraction(draw2);
+        }
+
+      }
+
+      var polyStrArray_x = new Array();
+      var polyStrArray_y = new Array();
+      var poly_Array_on = [0,0];
+      var poly_point_num = [0,0];
+
+      draw1.on('drawstart', function( evt ) {
+           source_poly1.clear();
+           poly_Array_on[0] = 0;
+           document.getElementById("msg_poly_lot").innerHTML =  'drawstart....' ;
+           document.getElementById("msg_poly_area").innerHTML =  '' ;
+      });
+      draw2.on('drawstart', function( evt ) {
+           source_poly2.clear();
+           poly_Array_on[1] = 0;
+           document.getElementById("msg_poly_lot").innerHTML =  'drawstart....' ;
+           document.getElementById("msg_poly_area").innerHTML =  '' ;
+      });
+
+      draw1.on('drawend', function( evt ) {
+
+           var feature = evt.feature;
+           var coords = feature.getGeometry().getCoordinates();
+           var coordArray = coords.toString().split(",");
+
+           polyStrArray_x[0] = new Array();
+           polyStrArray_y[0] = new Array();
+
+           poly_point_num[0] = coordArray.length/2;
+
+           if((poly_point_num[0] > 0) && (onMaker == 1)){
+               if(poly_Array_on[1] == 1){
+                    document.getElementById("msg_poly_lot").innerHTML =  ' (Polygon1, Polygon2) ';
+
+               }else{
+                    document.getElementById("msg_poly_lot").innerHTML =  ' (Polygon1) ' ;
+               }
+               for (var i=0; i<poly_point_num[0]; i++) {    // 多角形の経緯度の取得
+                    var info = ol.proj.transform([coordArray[i*2], coordArray[(i*2)+1]], 'EPSG:3857', 'EPSG:4326');
+                    polyStrArray_x[0][i] = info[0];
+                    polyStrArray_y[0][i] = info[1];
+                }
+
+            var table = document.getElementById("table_poly");
+
+            while( table.rows[ 0 ] ) table.deleteRow( 0 ); //削除
+
+            poly_Array_on[0] = 1;
+
+          }
+      });
+      draw2.on('drawend', function( evt ) {
+
+           var feature = evt.feature;
+           var coords = feature.getGeometry().getCoordinates();
+           var coordArray = coords.toString().split(",");
+
+           polyStrArray_x[1] = new Array();
+           polyStrArray_y[1] = new Array();
+
+           poly_point_num[1] = coordArray.length/2;
+
+           if((poly_point_num[1] > 0) && (onMaker == 1)){
+               if(poly_Array_on[0] == 1){
+                    document.getElementById("msg_poly_lot").innerHTML =  ' (Polygon1, Polygon2) ';
+
+               }else{
+                    document.getElementById("msg_poly_lot").innerHTML =  ' (Polygon2) ' ;
+               }
+               for (var i=0; i<poly_point_num[1]; i++) {    // 多角形の経緯度の取得
+                    var info = ol.proj.transform([coordArray[i*2], coordArray[(i*2)+1]], 'EPSG:3857', 'EPSG:4326');
+                    polyStrArray_x[1][i] = info[0];
+                    polyStrArray_y[1][i] = info[1];
+                }
+
+            var table = document.getElementById("table_poly");
+
+            while( table.rows[ 0 ] ) table.deleteRow( 0 ); //削除
+
+            poly_Array_on[1] = 1;
+
+          }
+      });
+
+
+
+      typeSelect.onchange = function() {
+//           source_poly1.clear();
+           addInteraction();
+      };
+
+      function button_poly_del() {
+           source_poly1.clear();
+           map.removeInteraction(draw1);
+           map.removeLayer(vector_poly1);
+           source_poly2.clear();
+           map.removeInteraction(draw2);
+           map.removeLayer(vector_poly2);
+           poly_Array_on = [0,0];
+
+           document.getElementById("msg_poly_lot").innerHTML =  '' ;
+           document.getElementById("msg_poly_area").innerHTML =  '' ;
+           var table = document.getElementById("table_poly");
+           while( table.rows[ 0 ] ) table.deleteRow( 0 ); //削除
+           document.getElementsByName("None")[0].selected = true;
+      }
+
+      function button_poly_calc() {
+                var i;
+                var result_area = [0, 0];
+//                var rate_area;
+                // 面積]
+
+ 				document.getElementById("button_times").disabled = true; 
+				document.getElementById("files").disabled = true; 
+				document.getElementById("type_poly").disabled = true; 
+				document.getElementById("button_polyc").disabled = true; 
+				document.getElementById("button_polyd").disabled = true; 
+				document.getElementById("button_timediffs").disabled = true; 
+
+               if(poly_Array_on[0]==1){
+                    hubeny(polyStrArray_y[0][0]);
+                }else if(poly_Array_on[1]==1){
+                    hubeny(polyStrArray_y[1][0]);
+                }
+
+               document.getElementById("msg_poly_area").innerHTML  = '<br>'; 
+
+                for(i=0;i<2;i++){
+                    if(poly_Array_on[i]==1){
+                        result_area[i] = poly_area_calc(i);
+                        if(i==0){
+                            document.getElementById("msg_poly_area").innerHTML  += '[Red Area: ' 
+                                                             +  result_area[0].toFixed(2) + ' m' + '2'.sup() + ']';
+                        }else if(i==1){
+                            document.getElementById("msg_poly_area").innerHTML  += '[Green Area: ' 
+                                                             +  result_area[1].toFixed(2) + ' m' + '2'.sup() + ']';
+                        }
+                    }
+                }
+
+                var circle_area = ((str3_input_dele * str3_input_dele) - (str3_input_deri * str3_input_deri)) 
+                                                                 * Math.PI * ((str3_input_lo + str3_input_up)/360);
+                document.getElementById("msg_poly_area").innerHTML  += '[Pink Area: ' 
+                                        + circle_area.toFixed(2) +  ' m' + '2'.sup() + ']';
+
+
+              // 測位結果のエリア内外判定
+                var periodTime_poly = parseInt(document.getElementById('time_period_poly').value, 10);
+                var f_num = 0;
+                var inc_count = 0;
+                var judge_count = [0,0];
+                var f_count_all = [];
+                var f_count_select  = new Array();
+                var f_count_end = [];
+
+                var poly_end = new Date(startTime);
+                poly_end.setSeconds(poly_end.getSeconds() + periodTime_poly);
+
+                var coords;
+                var coordArray;
+                var judge_point;
+                var samplingTime_poly;
+
+                f_count_select[0]  = new Array();
+                f_count_select[1]  = new Array();
+
+                for(i=0;i<=file_length;i++){
+                    if((tm[i]>=startTime)&(tm[i]<endTime)){
+
+                         if(tm[i]>poly_end){
+                               f_count_all[f_num] = inc_count;
+                               f_count_select[0][f_num] = judge_count[0];
+                               f_count_select[1][f_num] = judge_count[1];
+                               f_count_end[f_num] = new Date(poly_end);
+                               inc_count = 0;
+                               judge_count = [0,0];
+                               f_num += 1;
+                               poly_end.setSeconds(poly_end.getSeconds() + periodTime_poly);
+                         }
+                         inc_count += 1;
+                         coords = pointFeatures[i].getGeometry().getCoordinates();
+                         coordArray = coords.toString().split(",");
+                         judge_point = ol.proj.transform([coordArray[0], coordArray[1]], 'EPSG:3857', 'EPSG:4326');
+
+                         judge_count[0] += judge(judge_point[0], judge_point[1], 0);
+                         judge_count[1] += judge(judge_point[0], judge_point[1], 1);
+
+                    }
+                }
+                f_count_all[f_num] = inc_count;
+                f_count_select[0][f_num] = judge_count[0];
+                f_count_select[1][f_num] = judge_count[1];
+                if(endTime < poly_end) poly_end = endTime;
+                f_count_end[f_num] = new Date(poly_end);
+                f_num += 1;
+
+              // 1フレーム間隔
+                if(samplingTime == 0){
+                    samplingTime_poly = ((tm[file_length].getTime() - tm[0].getTime())/1000)/(frameNo[file_length]-frameNo[0]+1);
+                }else{
+                    samplingTime_poly = samplingTime;
+                }
+                samplingTime_poly = 1/samplingTime_poly;
+                document.getElementById("msg_poly_area").innerHTML  += '<br>' + samplingTime_poly.toFixed(2) + 'fps'; 
+
+              // 表の作成
+                var table = document.getElementById("table_poly");
+
+                while( table.rows[ 0 ] ) table.deleteRow( 0 ); //削除
+
+                var label_row = table.insertRow( -1 );
+                var label_cell_1;
+                var rate_people;
+
+
+                var column_num = 5;
+                if((poly_Array_on[0]==1)&&(poly_Array_on[1]==1)) column_num = 7;
+
+
+                for(i=0;i<3;i++){
+                    label_cell_1 = label_row.insertCell( -1 );
+                    table.rows[ 0 ].cells[ i ].style.backgroundColor  = '#eee';
+                    table.rows[ 0 ].cells[ i ].style.fontWeight = "bold";;
+                }
+                table.rows[ 0 ].cells[ 0 ].innerText  = "Time";
+                table.rows[ 0 ].cells[ 0 ].colSpan = 2;
+                if(column_num == 5){
+                    table.rows[ 0 ].cells[ 1 ].colSpan = 2;
+                }else{ //Population density: 782.1898 persons/km2
+                    table.rows[ 0 ].cells[ 1 ].colSpan = 3;
+                    table.rows[ 0 ].cells[ 2 ].colSpan = 2;
+                }
+                table.rows[ 0 ].cells[ 1 ].innerText  = "Average";
+                table.rows[ 0 ].cells[ 2 ].innerText  = "Density (@100m2)";
+
+
+
+                label_row = table.insertRow( -1 );
+
+                for(i=0;i<column_num;i++){
+                    label_cell_1 = label_row.insertCell( -1 );
+                    table.rows[ 1 ].cells[ i ].style.backgroundColor  = '#eee';
+                    table.rows[ 1 ].cells[ i ].style.fontWeight = "bold";;
+                    table.rows[ 1 ].cells[ i ].style.width = "900px";;
+                }
+                table.rows[ 1 ].cells[ 0 ].innerText  = "Start Time";
+                table.rows[ 1 ].cells[ 1 ].innerText  = "End Time";
+                var table_title = ["Red Area", "Green Area", "Pink Area"];
+                var table_rate = ["Red Area", "Green Area"];
+                var column_pos = 2;
+                column_pos = 2;
+                var column_redrate_pos = 2 + poly_Array_on[1];
+                var column_greenrate_pos = 2 + poly_Array_on[0];
+                if(poly_Array_on[0]==1){
+                    table.rows[ 1 ].cells[ column_pos ].innerText  = table_title[0];
+                    table.rows[ 1 ].cells[ column_pos + column_redrate_pos ].innerText  = table_rate[0];
+                    column_pos++
+                }
+                if(poly_Array_on[1]==1){
+                    table.rows[ 1 ].cells[ column_pos ].innerText  = table_title[1];
+                    table.rows[ 1 ].cells[ column_pos + column_greenrate_pos ].innerText  = table_rate[1];
+                    column_pos++
+                }
+                table.rows[ 1 ].cells[ column_pos ].innerText  = table_title[2];
+
+
+
+                for(i=0;i<f_num;i++){
+                     label_row = table.insertRow( -1 );
+
+                     for(var j=0;j<column_num;j++){
+                         label_cell_1 = label_row.insertCell( -1 );
+                     }
+                     if(i==0){
+                         table.rows[ i+2 ].cells[ 0 ].innerText  = time2str(startTime);
+                     }else{
+                         table.rows[ i+2 ].cells[ 0 ].innerText  = time2str(f_count_end[i-1]);
+                     }
+
+                     table.rows[ i+2 ].cells[ 1 ].innerText  = time2str(f_count_end[i]);
+
+                    column_pos = 2;
+                    if(poly_Array_on[0]==1){
+                            rate_people =  (f_count_select[0][i]/(samplingTime_poly*periodTime_poly));
+                            table.rows[ i+2 ].cells[ column_pos ].innerText  
+                                           = rate_people.toFixed(2);
+                            rate_people =  rate_people / (result_area[0]/100);
+                            table.rows[ i+2 ].cells[ column_pos + column_redrate_pos ].innerText  = rate_people.toFixed(2);
+                        column_pos++
+                    }
+                    if(poly_Array_on[1]==1){
+                            rate_people =  (f_count_select[1][i]/(samplingTime_poly*periodTime_poly));
+                            table.rows[ i+2 ].cells[ column_pos ].innerText  
+                                           = rate_people.toFixed(2);
+                            rate_people =  rate_people /  (result_area[1]/100);
+                            table.rows[ i+2 ].cells[ column_pos + column_greenrate_pos ].innerText  = rate_people.toFixed(2);
+                        column_pos++
+                    }
+                    table.rows[ i+2 ].cells[ column_pos ].innerText  
+                                           = (f_count_all[i]/(samplingTime_poly*periodTime_poly)).toFixed(2);
+
+                }
+
+				document.getElementById("button_times").disabled = false; 
+				document.getElementById("files").disabled = false; 
+				document.getElementById("type_poly").disabled = false; 
+				document.getElementById("button_polyc").disabled = false; 
+				document.getElementById("button_polyd").disabled = false; 
+				document.getElementById("button_timediffs").disabled = false; 
+      }
+
+//多角形の面積
+            function poly_area_calc(poly_num) {
+                var area_x = 0;
+                var area_y = 0;
+                var zeropoint_y = polyStrArray_y[poly_num][0] * 2;
+                var poly_area = 0;
+                for (i=0; i<(poly_point_num[poly_num]-1); i++) {
+                    area_x = (polyStrArray_x[poly_num][i] - polyStrArray_x[poly_num][i+1]);
+                    area_y = (polyStrArray_y[poly_num][i] + polyStrArray_y[poly_num][i+1] - zeropoint_y);
+                    poly_area += area_x * area_y;
+                }
+                poly_area = Math.abs(poly_area / Lon_m / Lat_m / 2);
+
+                return poly_area;
+            }
+//多角形の内外判定
+			function judge(judge_point_x, judge_point_y, color_num) {
+				var judge_result = 0;
+				var all_angle = 0;
+
+                for (var i=0; i<(poly_point_num[color_num]-1); i++) {
+                    all_angle += func_tan(judge_point_x, judge_point_y, i, color_num);
+                }
+
+                all_angle = Math.abs(all_angle);
+
+                if(all_angle > 3 ){ // 2*PI で図形内に点が存在。余裕をもってPI以上なら。
+                    judge_result = 1;
+                }
+
+				return judge_result;
+			}
+
+			function func_tan(judge_point_x, judge_point_y, i_num, color_num) {
+				var angle = 0;
+				var Ax, Ay, Bx, By;
+				var AB_cos, AB_sin;
+
+				Ax = polyStrArray_x[color_num][i_num] - judge_point_x;
+				Ay = polyStrArray_y[color_num][i_num] - judge_point_y;
+				Bx = polyStrArray_x[color_num][i_num+1] - judge_point_x;
+				By = polyStrArray_y[color_num][i_num+1] - judge_point_y;
+
+				AB_cos = Ax * Bx + Ay * By;
+				AB_sin = Ax * By - Ay * Bx;
+
+				angle = Math.atan2(AB_sin, AB_cos);
+
+				return angle;
+			}
+
+
+//時差
+      function button_timediff_set() {
+				document.getElementById("button_times").disabled = true; 
+				document.getElementById("files").disabled = true; 
+				document.getElementById("type_poly").disabled = true; 
+				document.getElementById("button_polyc").disabled = true; 
+				document.getElementById("button_polyd").disabled = true; 
+				document.getElementById("button_timediffs").disabled = true; 
+
+				// 時差調整
+				var time_diff_d = time_diff;
+				time_diff = parseFloat(document.getElementById('tm_df').value, 10);
+				if(isNaN(time_diff) )   time_diff = -8 ;
+
+				time_diff_d = time_diff - time_diff_d;
+
+				if(time_diff_d != 0){
+	                for(i=0;i<=file_length;i++){
+						tm[i].setHours(tm[i].getHours() + time_diff_d);
+					}
+					startTime.setHours(startTime.getHours() + time_diff_d);
+					endTime.setHours(endTime.getHours() + time_diff_d);
+				}
+
+				get_timeparm_intper();
+				
+				set_value();
+				file_set_timeparm();
+				list_set_timeparm();
+
+				document.getElementById("button_times").disabled = false; 
+				document.getElementById("files").disabled = false; 
+				document.getElementById("type_poly").disabled = false; 
+				document.getElementById("button_polyc").disabled = false; 
+				document.getElementById("button_polyd").disabled = false; 
+				document.getElementById("button_timediffs").disabled = false; 
+      }
+
+    </script>
+  </body>
+</html>

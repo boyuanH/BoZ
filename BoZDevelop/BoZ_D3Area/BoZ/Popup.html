@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>jQuery实现的弹出层特效 在线演示 www.divcss5.com</title>
+<link rel="stylesheet" href="css/common.css" type="text/css" />
+<style type="text/css">
+.divcss5_list_title{background:#eeeeee; border:1px solid #cccccc; padding:1em;}
+.divcss5_list_content{padding:1em;}
+#tinybox{position:absolute; display:none; padding:10px; background:#ffffff url(image/preload.gif) no-repeat 80% 50%; border:10px solid #e3e3e3; z-index:2000;}
+#tinymask{position:absolute; display:none; top:0; left:0; height:100%; width:100%; background:#000000; z-index:1500;}
+#tinycontent{background:#ffffff; font-size:1.1em;}
+
+#n{margin:10px auto; width:920px; border:1px solid #CCC;font-size:12px; line-height:30px;}
+#n a{ padding:0 4px; color:#333}
+</style>
+<script type="text/javascript" src="js/tinybox.js"></script>
+</head>
+
+<body>
+<!--<div >
+	<img width = '96' src="image/lastpage.png" onclick='src="image/nextpage.png"'/>
+	<img width='640' height='480' src='png_image/000004.png' />
+	<img width="96" src="image/nextpage.png" />
+</div>-->
+<p>&nbsp;</p>
+	<!--<div class="divcss5_out_box">-->
+    	<!--<div class="divcss5_in_box">-->
+            <!--<div class="divcss5_main_con">-->
+            	<!--<div class="divcss5_list_title"><b>加载一个静态页面</b><a class="ml20" href="#" id="click_test1">效果预览</a></div>-->
+                <!--<div class="divcss5_list_title"><a class="ml20" href="#" id="click_test2">效果预览</a></div>-->
+			<!--<a class="ml20" href="#" id="click_test2">效果预览</a>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+			<a class="ml20" href="#" id="click_test2">效果预览</a>
+    
+	<script type="text/javascript">
+//      T$('click_test1').onclick = function(){TINY.box.show('test.html',1,300,150,1)}//test.html为弹出层对应网页
+        //var content2 = "<div><table><tr><td><img id='popupLastImg' width = '96' src='image/lastpage.png' onclick='T$(&quot;popupImg&quot;).src=&quot;png_image/000080.png&quot;'></td><td><img id='popupImg' width='640' height='480' src='png_image/000004.png' /></td><td><img id='popupNextImg' width='96' src='image/nextpage.png' onclick='T$(&quot;popupImg&quot;).src=&quot;png_image/030000.png&quot;'/></td></tr></table></div>";
+        var content2 = "<div><table><tr><td><img id='popupLastImg' width = '96' src='image/lastpage.png' onclick='lastimage()'></td><td><img id='popupImg' width='640' height='480' src='png_image/000004.png' /></td><td><img id='popupNextImg' width='96' src='image/nextpage.png' onclick='nextimage()'/></td></tr></table></div>";
+        T$('click_test2').onclick = function(){TINY.box.show(content2,0,0,0,1)};
+        
+        var index = 100;
+        
+		function lastimage(){
+			index--;
+			console.log("lastimage click and "+index);
+		}
+		
+		function nextimage(){
+			index++;
+			console.log("nextImage click and "+ index);
+		}
+		
+		
+    </script>
+</body>
+</html>
