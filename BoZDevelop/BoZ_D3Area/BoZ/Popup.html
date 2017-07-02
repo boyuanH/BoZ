@@ -39,7 +39,7 @@
 	<script type="text/javascript">
 //      T$('click_test1').onclick = function(){TINY.box.show('test.html',1,300,150,1)}//test.html为弹出层对应网页
         //var content2 = "<div><table><tr><td><img id='popupLastImg' width = '96' src='image/lastpage.png' onclick='T$(&quot;popupImg&quot;).src=&quot;png_image/000080.png&quot;'></td><td><img id='popupImg' width='640' height='480' src='png_image/000004.png' /></td><td><img id='popupNextImg' width='96' src='image/nextpage.png' onclick='T$(&quot;popupImg&quot;).src=&quot;png_image/030000.png&quot;'/></td></tr></table></div>";
-        var content2 = "<div><table><tr><td><img id='popupLastImg' width = '96' src='image/lastpage.png' onclick='lastimage()'></td><td><img id='popupImg' width='640' height='480' src='png_image/000004.png' /></td><td><img id='popupNextImg' width='96' src='image/nextpage.png' onclick='nextimage()'/></td></tr></table></div>";
+        var content2 = "<div><table><tr><td><img id='popupLastImg' width = '96' src='image/lastpage.png' onclick='lastimage()'></td><td><img id='popupImg' width='640' height='480' src='png_image/00d0004.png' onerror='errorinput(this);' onload='LoadOK(this)' /></td><td><img id='popupNextImg' width='96' src='image/nextpage.png' onclick='nextimage()'/></td></tr></table></div>";
         T$('click_test2').onclick = function(){TINY.box.show(content2,0,0,0,1)};
         
         var index = 100;
@@ -54,6 +54,15 @@
 			console.log("nextImage click and "+ index);
 		}
 		
+		function errorinput(T){
+			console.log(T.src + "Load failed");
+			T.src='png_image/error.png';
+		};
+		
+		function LoadOK(T)
+		{
+			console.log(T.src +"Load ok");
+		}
 		
     </script>
 </body>

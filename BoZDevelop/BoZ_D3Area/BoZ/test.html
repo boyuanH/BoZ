@@ -2,13 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="js/tinybox.js"></script>
 <title>空白测试页面</title>
 </head>
 
 <body>
 	<img src="image/lastpage.png" id="clickBTNLast" onclick="clickLast()"/>
 	<img src="image/nextpage.png" id="clickBTNNext" onclick="clickNext()" />
+	<img id='checkexist' onerror=errorinput() /></p> 
 	<script type="text/javascript">
+		
+		var imgsrc1 = './image/nextpage.png';
+		var imgsrc2 = './image/nextpage1.png';
+		
+		var currentresult = true;
+		T$('checkexist').src = imgsrc2;
+		console.log("1 result = "+currentresult);
+				
+
 		var index = 0;
 		var filenames=new Array();
 		
@@ -41,6 +52,27 @@
 				index++;
 			}
 		};
+		
+		function CheckImgExists(imgurl) {  
+		    var ImgObj = new Image(); //判断图片是否存在  
+		     
+		    //没有图片，则返回-1  
+		    var result = true;
+		    ImgObj.onerror = function(){
+		    	result = false;
+		    };
+		    ImgObj.src = imgurl; 
+		    ImgObj.onload = function(){
+		    	
+		    }
+			return result;
+		};  
+ 
+		function errorinput(){
+			currentresult = false;
+			console.log("load fail");
+		}
+		
 	</script>
 </body>
 </html>

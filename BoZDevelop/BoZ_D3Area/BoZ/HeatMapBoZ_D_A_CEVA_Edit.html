@@ -381,6 +381,9 @@
 			var str3_input_lo = 22;
 			var str3_input_dele = 35;
 			var str3_input_deri = 2;
+			
+			var CurrentHeatmapImageIndex;
+			var CurrentHeatmapImageGroup = new Array();
 
 // for csv
 			var tm=[];
@@ -1048,12 +1051,81 @@
 			function HeatmapDetailClicked(){
 				
 				var framestring = T$('msg_fileno').innerHTML;
-				console.log(framestring);
+				var strsA = new Array();
+				strsA = framestring.split(":");
+				strsA = strsA[1].split("-");
+				for(i=0;i<strsA.length;i++){
+					strsA[i] = strsA[i].trim();
+				}
+				
+				CurrentHeatmapImageIndex = 0;
+				CurrentHeatmapImageGroup.splice(0,CurrentHeatmapImageGroup.length);
+				
+				for(var i= strsA[0]*1,index=0;i<=strsA[1]*1;i=i+4,index++){
+					CurrentHeatmapImageGroup[index] = i;
+				}
 				
 				T$('chk_auto').checked = false;
 				checkbox_auto();
+				
+				var popupImageItem = T$('popupImg');
+        var content2 = "<div><table><tr><td><img id='popupLastImg' width = '96' src='image/lastpage.png' onclick='lastimage()'></td><td><img id='popupImg' width='640' height='480' src='png_image/"+ConvertImageIndexToFrame(CurrentHeatmapImageGroup[0])+".png"+"' onerror='errorinput(this);' /></td><td><img id='popupNextImg' width='96' src='image/nextpage.png' onclick='nextimage()'/></td></tr></table></div>";
+				//popupImageItem.onclick = function(){TINY.box.show(content2,0,0,0,1)};
+				TINY.box.show(content2,0,0,0,1);
+
 			}
 
+			function lastimage(){
+				var popupImageItem = T$('popupImg');
+				if(CurrentHeatmapImageIndex == 0){
+					CurrentHeatmapImageIndex = CurrentHeatmapImageGroup.length-1;
+				}
+				else{
+					CurrentHeatmapImageIndex--;
+				}
+
+				popupImageItem.src = 'png_image/'+ConvertImageIndexToFrame(CurrentHeatmapImageGroup[CurrentHeatmapImageIndex])+'.png';
+
+			}
+			
+			function nextimage(){
+				var popupImageItem = T$('popupImg');
+				if(CurrentHeatmapImageIndex == CurrentHeatmapImageGroup.length-1){
+					CurrentHeatmapImageIndex = 0;
+				}
+				else{
+					CurrentHeatmapImageIndex++;
+				}
+				
+				popupImageItem.src = 'png_image/'+ConvertImageIndexToFrame(CurrentHeatmapImageGroup[CurrentHeatmapImageIndex])+'.png';
+				
+			}
+			
+			function errorinput(T){
+				console.log(T.src + "Load failed");
+				T.src='png_image/error.png';
+			}
+			
+			function ConvertImageIndexToFrame(imageIndex){
+				var index = imageIndex * 1;
+				if(index<0){
+					return "";
+				}
+				
+				if(index < 10){
+					return "00000"+index;
+				}else if(index < 100){
+					return "0000"+index;
+				}else if(index < 1000){
+					return "000"+index;
+				}else if(index < 10000){
+					return "00"+index;
+				}else{
+					return "0"+index;
+				}
+			
+			}
+			
 			function button_mak_set() {
 				Lon_maker = parseFloat(document.getElementById('mak_up').value, 10);
 				Lat_maker = parseFloat(document.getElementById('mak_lo').value, 10);
@@ -1626,7 +1698,11 @@
 
 				return angle;
 			}
-
+			
+			String.prototype.trim=function()
+			{
+			     return this.replace(/(^\s*)|(\s*$)/g, "");
+			}
 
 //����
       function button_timediff_set() {
