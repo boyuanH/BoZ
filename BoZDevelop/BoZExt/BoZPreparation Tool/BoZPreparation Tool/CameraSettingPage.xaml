@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="BoZPreparation_Tool.CameraSettingPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="6*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Label Padding="30 5" Name="CameraSettingPageTitleLabel" FontSize="42" Content="CameraSetting" VerticalAlignment="Center"/>
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <Label Name="CameraSettingPageSettingFileLabel"  Padding="20 10" Content="Camera Setting File:" FontSize="16" VerticalAlignment="Center"/>
+                <TextBox Name="CameraSettingPageSettingFileTextBox"    Width="500" Height="30" />
+                <Button Name="CameraSettingPageBrowerBtn" Content="Browse" MinWidth="75" Margin="20"  Height="30"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Name="CameraSettingPageSettingFileLoadBtn" Content="Load" MinWidth="65" Margin="10 10 20 15"/>
+                <Button Name="CameraSettingPageSettingFileSaveBtn" Content="Save" MinWidth="65" Margin=" 10 10 50 15"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                
+                
+            </Grid>
+        </Grid>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Name="CameraSettingPageNextBtn" Margin="15 10 60 15" MinWidth="70" Content="Next"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
