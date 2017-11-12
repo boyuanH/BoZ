@@ -13,7 +13,7 @@
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Label Padding="30 5" Name="CameraSettingPageTitleLabel" FontSize="42" Content="CameraSetting" VerticalAlignment="Center"/>
+            <Label Margin="30 5" Name="CameraSettingPageTitleLabel" FontSize="42" FontWeight="Bold" Content="CameraSetting" VerticalAlignment="Center"/>
         </StackPanel>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
@@ -36,16 +36,117 @@
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
+            <Grid Grid.Row="0" Margin="5 0 10 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*" />
                     <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="3*" />
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
-                
-                
+                <Grid Grid.Column="0" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" VerticalAlignment="Center">
+                            <Label Content="Camera Location" FontSize="20" Margin="20 0 10 0"></Label>
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="3*" />
+                            </Grid.ColumnDefinitions>
+                            <DockPanel Grid.Column="0" VerticalAlignment="Center">
+                                <Label Content="Longitude:" DockPanel.Dock="Left" FontSize="16" Margin="25 5 0 5"/>
+                            </DockPanel>
+                            <DockPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBox Name="CameraSettingPageCameraLocationLongitude" FontSize="16" Margin="10 5 0 5" MinWidth="50" />
+                            </DockPanel>
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="3*" />
+                            </Grid.ColumnDefinitions>
+                            <DockPanel Grid.Column="0" VerticalAlignment="Center">
+                                <Label Content="Latitude:" DockPanel.Dock="Left" FontSize="16" Margin="25 5 0 5"/>
+                            </DockPanel>
+                            <DockPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBox Name="CameraSettingPageCameraLocationLatitude" FontSize="16" Margin="10 5 0 5" MinWidth="50" />
+                            </DockPanel>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <DockPanel Grid.Column="1">
+                    <Button Content="Show Map" Name="CameraSettingPageCameraLocationShowmapBtn" DockPanel.Dock="Right" Margin="15 120 5 45"/>
+                </DockPanel>
+                <Grid Grid.Column="2" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" VerticalAlignment="Center">
+                            <Label Content="Target Location" FontSize="20" Margin="20 0 10 0"></Label>
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="3*" />
+                            </Grid.ColumnDefinitions>
+                            <DockPanel Grid.Column="0" VerticalAlignment="Center">
+                                <Label Content="Longitude:" DockPanel.Dock="Left" FontSize="16" Margin="25 5 0 5"/>
+                            </DockPanel>
+                            <DockPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBox Name="CameraSettingPageTargetLocationLongitude" FontSize="16" Margin="10 5 0 5" MinWidth="50" />
+                            </DockPanel>
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="3*" />
+                            </Grid.ColumnDefinitions>
+                            <DockPanel Grid.Column="0" VerticalAlignment="Center">
+                                <Label Content="Latitude:" DockPanel.Dock="Left" FontSize="16" Margin="25 5 0 5"/>
+                            </DockPanel>
+                            <DockPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBox Name="CameraSettingPageTargetLocationLatitude" FontSize="16" Margin="10 5 0 5" MinWidth="50" />
+                            </DockPanel>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <DockPanel Grid.Column="3">
+                    <Button Content="Show Map" DockPanel.Dock="Right" Name="CameraSettingPageTargetLocationShowmapBtn" Margin="15 120 5 45"/>
+                </DockPanel>
             </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>    
+                <DockPanel VerticalAlignment="Center" Grid.Column="0">
+                    <Label DockPanel.Dock="Left" Content="Camera Height From Floor(m)" Margin="35 0 0 0"/>
+                </DockPanel>
+                <DockPanel VerticalAlignment="Center" Grid.Column="1">
+                    <TextBox Name="CameraSettingPageCameraHeightTextBox" DockPanel.Dock="Right" Margin="5 0 150 0" />
+                </DockPanel>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <DockPanel VerticalAlignment="Center" Grid.Column="0">
+                    <Label DockPanel.Dock="Left" Content="Camera Angle" Margin="35 0 0 0"/>
+                </DockPanel>
+                <DockPanel VerticalAlignment="Center" Grid.Column="1">
+                    <TextBox Name="CameraSettingPageCameraAngleTextBox" DockPanel.Dock="Right" Margin="5 0 150 0" />
+                </DockPanel>
+            </Grid>
+
         </Grid>
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Name="CameraSettingPageNextBtn" Margin="15 10 60 15" MinWidth="70" Content="Next"/>

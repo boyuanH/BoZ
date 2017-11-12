@@ -4,8 +4,49 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="600" d:DesignWidth="800">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Label Padding="30 5" Name="PictureSettingPageTitleLabel" FontSize="42" FontWeight="Bold" Content="Picture Setting" VerticalAlignment="Center"/>
+        </StackPanel>
+        <DockPanel Grid.Row="1"  VerticalAlignment="Center">     
+            <Label Content="Picture Folder:" Padding="25 5 20 5"/>
+            <Button Name="PictureSettingPageFictureFolderSelectBtn" DockPanel.Dock="Right" MaxWidth="100" MinWidth="50" Content="Browser"  Margin="20 5 35 5 "/>
+            <TextBox Name="PictureSettingPagePictureFolderTextBox" DockPanel.Dock="Right"  Margin="5 5 5 5" />
+        </DockPanel>
+        <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right">
+            <Button Name="PictureSettingPageFictureFolderSetBtn"  Content="Set" MaxWidth="80" MinWidth="50" Margin="400 10 35 10"/>
+        </StackPanel>
+        <StackPanel Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Center">
+            <Label Content="Start Time" FontWeight="Bold" FontSize="14" Margin="30 5 5 5" />
+            <TextBox Name="StartTimeHourTextbox" MinWidth="35"/>
+            <Label Content=":" />
+            <TextBox Name="StartTimeMinuteTextbox" MinWidth="35"/>
+            <Label Content=":" />
+            <TextBox Name="StartTimeSecondTextbox" MinWidth="35"/>
+        </StackPanel>
+        <StackPanel Grid.Row="5" Orientation="Horizontal" VerticalAlignment="Center">
+            <Label Content="End   Time" FontWeight="Bold" FontSize="14" Margin="30 5 5 5"/>
+            <TextBox Name="EndTimeHourTextbox" MinWidth="35"/>
+            <Label Content=":" />
+            <TextBox Name="EndTimeMinuteTextbox" MinWidth="35"/>
+            <Label Content=":" />
+            <TextBox Name="EndTimeSecondTextbox" MinWidth="35"/>
+        </StackPanel>
+        <StackPanel Grid.Row="7" Orientation="Horizontal" Margin=" 0 15 0 15" HorizontalAlignment="Right">
+            <Button Name="PictureSettingPageBackBtn" MinWidth="80" Margin="10 0 10 0" Content="Back" />
+            <Button Name="PictureSettingPageAdvancedBtn" MinWidth="80" Margin="10 0 10 0" Content="Advanced" />
+            <Button Name="PictureSettingPageOkBtn" MinWidth="80" Margin="10 0 10 0"  Content="OK"  />
+        </StackPanel>
     </Grid>
 </UserControl>

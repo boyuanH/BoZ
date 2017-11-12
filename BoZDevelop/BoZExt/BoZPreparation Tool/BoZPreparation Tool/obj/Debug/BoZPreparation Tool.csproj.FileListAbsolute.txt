@@ -1,1 +1,24 @@
 E:\SourcesCode\Boz\1\BoZPreparation Tool\BoZPreparation Tool\bin\Debug\BoZPreparation Tool.exe.config
+D:\Work\RICOH\BoZ\BoZ\BoZDevelop\BoZExt\BoZPreparation Tool\BoZPreparation Tool\bin\Debug\BoZPreparation Tool.exe.config
+D:\Work\RICOH\BoZ\BoZ\BoZDevelop\BoZExt\BoZPreparation Tool\BoZPreparation Tool\bin\Debug\BoZPreparation Tool.exe
+D:\Work\RICOH\BoZ\BoZ\BoZDevelop\BoZExt\BoZPreparation Tool\BoZPreparation Tool\bin\Debug\BoZPreparation Tool.pdb
+D:\Work\RICOH\BoZ\BoZ\BoZDevelop\BoZExt\BoZPreparation Tool\BoZPreparation Tool\obj\Debug\BoZPreparation Tool.csprojResolveAssemblyReference.cache
+D:\Work\RICOH\BoZ\BoZ\BoZDevelop\BoZExt\BoZPreparation Tool\BoZPreparation Tool\obj\Debug\AdvancedSettingPage.baml
+D:\Work\RICOH\BoZ\BoZ\BoZDevelop\BoZExt\BoZPreparation Tool\BoZPreparation Tool\obj\Debug\CameraSettingPage.baml
+D:\Work\RICOH\BoZ\BoZ\BoZDevelop\BoZExt\BoZPreparation Tool\BoZPreparation Tool\obj\Debug\MainWindow.baml
+D:\Work\RICOH\BoZ\BoZ\BoZDevelop\BoZExt\BoZPreparation Tool\BoZPreparation Tool\obj\Debug\MapWindowPage.baml
+D:\Work\RICOH\BoZ\BoZ\BoZDevelop\BoZExt\BoZPreparation Tool\BoZPreparation Tool\obj\Debug\PictureSettingPage.baml
+D:\Work\RICOH\BoZ\BoZ\BoZDevelop\BoZExt\BoZPreparation Tool\BoZPreparation Tool\obj\Debug\Processing.baml
+D:\Work\RICOH\BoZ\BoZ\BoZDevelop\BoZExt\BoZPreparation Tool\BoZPreparation Tool\obj\Debug\AdvancedSettingPage.g.cs
+D:\Work\RICOH\BoZ\BoZ\BoZDevelop\BoZExt\BoZPreparation Tool\BoZPreparation Tool\obj\Debug\CameraSettingPage.g.cs
+D:\Work\RICOH\BoZ\BoZ\BoZDevelop\BoZExt\BoZPreparation Tool\BoZPreparation Tool\obj\Debug\MainWindow.g.cs
+D:\Work\RICOH\BoZ\BoZ\BoZDevelop\BoZExt\BoZPreparation Tool\BoZPreparation Tool\obj\Debug\MapWindowPage.g.cs
+D:\Work\RICOH\BoZ\BoZ\BoZDevelop\BoZExt\BoZPreparation Tool\BoZPreparation Tool\obj\Debug\PictureSettingPage.g.cs
+D:\Work\RICOH\BoZ\BoZ\BoZDevelop\BoZExt\BoZPreparation Tool\BoZPreparation Tool\obj\Debug\Processing.g.cs
+D:\Work\RICOH\BoZ\BoZ\BoZDevelop\BoZExt\BoZPreparation Tool\BoZPreparation Tool\obj\Debug\App.g.cs
+D:\Work\RICOH\BoZ\BoZ\BoZDevelop\BoZExt\BoZPreparation Tool\BoZPreparation Tool\obj\Debug\BoZPreparation Tool_MarkupCompile.cache
+D:\Work\RICOH\BoZ\BoZ\BoZDevelop\BoZExt\BoZPreparation Tool\BoZPreparation Tool\obj\Debug\BoZPreparation Tool.g.resources
+D:\Work\RICOH\BoZ\BoZ\BoZDevelop\BoZExt\BoZPreparation Tool\BoZPreparation Tool\obj\Debug\BoZPreparation_Tool.Properties.Resources.resources
+D:\Work\RICOH\BoZ\BoZ\BoZDevelop\BoZExt\BoZPreparation Tool\BoZPreparation Tool\obj\Debug\BoZPreparation Tool.csproj.GenerateResource.Cache
+D:\Work\RICOH\BoZ\BoZ\BoZDevelop\BoZExt\BoZPreparation Tool\BoZPreparation Tool\obj\Debug\BoZPreparation Tool.exe
+D:\Work\RICOH\BoZ\BoZ\BoZDevelop\BoZExt\BoZPreparation Tool\BoZPreparation Tool\obj\Debug\BoZPreparation Tool.pdb
