@@ -1,0 +1,91 @@
+﻿<Window x:Class="RCNdemo.setting"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        Height="350" Width="400" 
+        ResizeMode="NoResize"
+        Name="Setting" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,10,0,0">
+            <Label Name="SettingDir" Content="监控文件路径" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label></Label>
+            <TextBox Name="TextBox_DBPath" Height="20" Width="200" Text="{Binding DBSTR,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+            <Label></Label>
+            <Button Content="..." HorizontalAlignment="Right" Margin="0,0,10,0" Name="BtnSelectPath" Click="BtnSelectPath_Click" Height="20" Width="40"/>
+        </StackPanel>
+        <Border Grid.Row="1"  ClipToBounds="True" BorderBrush="DarkGray" BorderThickness="1" HorizontalAlignment="Stretch">
+            <Rectangle Height="auto" Width="auto">
+                <Rectangle.Fill>
+                    <SolidColorBrush Color="Black"/>
+                </Rectangle.Fill>
+            </Rectangle>
+        </Border>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="3*"/>            
+            </Grid.ColumnDefinitions>
+            <Label  Grid.Column="0" Content="页面显示时间" FontSize="15" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>            
+                <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Left">
+                    <Label   Content="请赐签名页:" FontSize="13" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBox Name="pleasesign" Height="20" Width="50"  Text="{Binding pleasesign_time,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label></Label>
+                    <Label  Content="s" FontSize="13" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Left">
+                    <Label   Content="广告页:" FontSize="13" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBox Name="advertise" Height="20" Width="50"  Text="{Binding advertise_time,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label></Label>
+                    <Label  Content="s" FontSize="13" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Left">
+                    <Label   Content="欢迎页:" FontSize="13" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBox Name="welcome" Height="20" Width="50"  Text="{Binding welcome_time,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label></Label>
+                    <Label  Content="s" FontSize="13" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Left">
+                    <Label   Content="签名墙:" FontSize="13" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBox Name="signedwall" Height="20" Width="50"  Text="{Binding signedwall_time,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label></Label>
+                    <Label  Content="s" FontSize="13" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+
+            </Grid>
+        </Grid>
+        <Border Grid.Row="3"  ClipToBounds="True" BorderBrush="DarkGray" BorderThickness="1" HorizontalAlignment="Stretch">
+            <Rectangle Height="auto" Width="auto">
+                <Rectangle.Fill>
+                    <SolidColorBrush Color="Black"/>
+                </Rectangle.Fill>
+            </Rectangle>
+        </Border>
+        <StackPanel Orientation="Horizontal" Grid.Row="4" Margin="0,10,0,0">
+            <Label  Content="签名墙背景透明度" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBox Name="Signwall_Opacity" Height="20" Width="200" Text="{Binding opacity,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+            <Label></Label>
+            <Label  Content="0~1" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </StackPanel>
+        <DockPanel Grid.Row="5"  HorizontalAlignment="Right" Margin="0,0,0,5" >
+            <Button Name="BtnCancel"  DockPanel.Dock="Right" Content="取消"  Margin="10,0,15,0" MinWidth="50" Height="22" Click="BtnCancel_Click" />
+            <Button Name="BtnConfirm" DockPanel.Dock="Right" Content="保存"  Margin="10,0,5,0" MinWidth="50" Height="22"  Click="BtnConfirm_Click"/>
+            <TextBox Name="Text_DefaultSearch" Text="{Binding DefaultSearch, Mode=oneWay, UpdateSourceTrigger=PropertyChanged}" Width="10" Visibility="Hidden"></TextBox>
+        </DockPanel>
+    </Grid>
+</Window>

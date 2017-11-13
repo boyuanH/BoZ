@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">RCNReg</string>
+    <string name="ftpUserName">FtpTest</string>
+    <string name="ftpPassword">000000</string>
+    <string name="ftpHost">172.25.85.168</string>
+    <string name="ftpPort">2122</string>
+    <string name="ftpPath"></string>
+    <string name="writeTempFielPath">D:\\Temp</string>
+</resources>

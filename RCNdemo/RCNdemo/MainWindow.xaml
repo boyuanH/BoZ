@@ -1,0 +1,25 @@
+﻿<Window x:Class="RCNdemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:RCNdemo"
+        xmlns:properties="clr-namespace:RCNdemo.Properties"
+		xmlns:pageTransitions="clr-namespace:WpfPageTransitions;assembly=WpfPageTransitions"
+        Title="MainWindow" 
+        WindowState="Maximized" WindowStyle="SingleBorderWindow"
+        Height="450" Width="800" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged_1" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <!-- <RowDefinition Height="40" /> -->
+        </Grid.RowDefinitions>
+        <pageTransitions:PageTransition Name="pageTransitionControl"  TransitionType="SlideAndFade" />
+        <!--
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Margin="5" x:Name="btnNextPage" Content="1" Click="btn1" Width="150" />
+            <Button Margin="5" x:Name="btnNextPage1" Content="2" Click="btnNextPage1_Click" Width="150" />
+            <Button Margin="5" x:Name="btnNextPage2" Content="3" Click="btnNextPage2_Click" Width="150" />
+            <Button Margin="5" x:Name="btnNextPage3" Content="4" Click="btnNextPage3_Click" Width="150" />
+        </StackPanel>
+        -->
+    </Grid>
+</Window>
