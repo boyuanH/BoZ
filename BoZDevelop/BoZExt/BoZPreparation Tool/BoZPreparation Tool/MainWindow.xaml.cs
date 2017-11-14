@@ -23,6 +23,9 @@ namespace BoZPreparation_Tool
         public MainWindow()
         {
             InitializeComponent();
+            pageTransitionControl.TransitionType = WpfPageTransitions.PageTransitionType.SlideAndFade;
+            CameraSettingPage camerasettingPage = new CameraSettingPage();
+            pageTransitionControl.ShowPage(camerasettingPage);
         }
     }
 }
