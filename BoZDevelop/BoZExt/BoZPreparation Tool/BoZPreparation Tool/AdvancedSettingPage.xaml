@@ -19,20 +19,20 @@
             <Label Margin="30 5" Content="Advanced Setting" FontSize="42" FontWeight="Bold" />
         </StackPanel>
         <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="45 0 0 0">
-            <CheckBox Name="AdvancedSettingPageBirdsViewCreationCheckBtn" Content="Birds View creation" FontSize="16" />
+            <CheckBox Name="AdvancedSettingPageBirdsViewCreationCheckBtn" Content="Birds View creation" FontSize="24" />
         </StackPanel>
         <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="45 0 0 0">
-            <CheckBox Name="AdvancedSettingPageObjectDectionCheckBtn" Content="Object detection" FontSize="16" />
+            <CheckBox Name="AdvancedSettingPageObjectDectionCheckBtn" Content="Object detection" FontSize="24" />
         </StackPanel>
         <StackPanel Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="45 0 0 0">
-            <CheckBox Name="AdvancedSettingPageDetectionConfirmationCheckBtn" Content="Detection confirmation" FontSize="16"/>
+            <CheckBox Name="AdvancedSettingPageDetectionConfirmationCheckBtn" Content="Detection confirmation" FontSize="24"/>
         </StackPanel>
         <StackPanel Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="45 0 0 0">
-            <CheckBox Name="AdvancedSettingPageHeatMapCreationCheckBtn" Content="Heap Map creation" FontSize="16"/>
-        </StackPanel>
-        <StackPanel Grid.Row="6" Margin="0 0 25 0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
-            <Button Name="AdvancedSettingPageBackBtn" MinWidth="65" Margin="15 0 10 0" Content="Back" />
-            <Button Name="AdvancedSettingPageOKBtn" MinWidth="65" Margin="15 0 10 0" Content="OK" />
+            <CheckBox Name="AdvancedSettingPageHeatMapCreationCheckBtn" Content="Heap Map creation" FontSize="24"/>
+        </StackPanel> 
+        <StackPanel Grid.Row="6" Margin="0 0 35 0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+            <Button Name="AdvancedSettingPageBackBtn" MinWidth="65" Margin="15 0 20 0" Content="Back" FontSize="16" Click="AdvancedSettingPageBackBtn_Click" />
+            <Button Name="AdvancedSettingPageOKBtn" MinWidth="65" Margin="15 0 15 0" Content="OK" FontSize="16" Click="AdvancedSettingPageOKBtn_Click" />
         </StackPanel>
     </Grid>
 </UserControl>

@@ -44,9 +44,9 @@
             <TextBox Name="EndTimeSecondTextbox" MinWidth="35"/>
         </StackPanel>
         <StackPanel Grid.Row="7" Orientation="Horizontal" Margin=" 0 15 0 15" HorizontalAlignment="Right">
-            <Button Name="PictureSettingPageBackBtn" MinWidth="80" Margin="10 0 10 0" Content="Back" />
-            <Button Name="PictureSettingPageAdvancedBtn" MinWidth="80" Margin="10 0 10 0" Content="Advanced" />
-            <Button Name="PictureSettingPageOkBtn" MinWidth="80" Margin="10 0 10 0"  Content="OK"  />
+            <Button Name="PictureSettingPageBackBtn" MinWidth="80" Margin="10 0 10 0" Content="Back" Click="PictureSettingPageBackBtn_Click" />
+            <Button Name="PictureSettingPageAdvancedBtn" MinWidth="80" Margin="10 0 10 0" Content="Advanced" Click="PictureSettingPageAdvancedBtn_Click" />
+            <Button Name="PictureSettingPageOkBtn" MinWidth="80" Margin="10 0 10 0"  Content="OK" Click="PictureSettingPageOkBtn_Click"  />
         </StackPanel>
     </Grid>
 </UserControl>

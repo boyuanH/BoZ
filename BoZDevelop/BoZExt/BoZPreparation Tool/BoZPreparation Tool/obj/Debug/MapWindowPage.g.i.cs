@@ -131,9 +131,21 @@ namespace BoZPreparation_Tool {
             return;
             case 5:
             this.MapWindowPageCancelBtn = ((System.Windows.Controls.Button)(target));
+            
+            #line 56 "..\..\MapWindowPage.xaml"
+            this.MapWindowPageCancelBtn.Click += new System.Windows.RoutedEventHandler(this.MapWindowPageCancelBtn_Click);
+            
+            #line default
+            #line hidden
             return;
             case 6:
             this.MapWindowPageOKBtn = ((System.Windows.Controls.Button)(target));
+            
+            #line 57 "..\..\MapWindowPage.xaml"
+            this.MapWindowPageOKBtn.Click += new System.Windows.RoutedEventHandler(this.MapWindowPageOKBtn_Click);
+            
+            #line default
+            #line hidden
             return;
             }
             this._contentLoaded = true;

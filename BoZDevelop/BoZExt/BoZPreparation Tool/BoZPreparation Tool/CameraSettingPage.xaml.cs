@@ -18,11 +18,44 @@ namespace BoZPreparation_Tool
     /// <summary>
     /// CameraSettingPage.xaml 的交互逻辑
     /// </summary>
+    /// 
+    public delegate void CameraSettingPageNextBtnClickDelegate(object sender, EventArgs e);
+
     public partial class CameraSettingPage : UserControl
     {
         public CameraSettingPage()
         {
             InitializeComponent();
+        }
+
+        private void CameraSettingPageNextBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CameraSettingPageBrowerBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CameraSettingPageSettingFileLoadBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CameraSettingPageSettingFileSaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CameraSettingPageCameraLocationShowmapBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CameraSettingPageTargetLocationShowmapBtn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -18,11 +18,26 @@ namespace BoZPreparation_Tool
     /// <summary>
     /// AdvancedSettingPage.xaml 的交互逻辑
     /// </summary>
+    /// 
+
+    public delegate void AdvancedSettingPageBackBtnClickDelegate(object sender, EventArgs e);
+    public delegate void AdvancedSettingPageOkBtnClickDelegatte(object sender, EventArgs e);
+
     public partial class AdvancedSettingPage : UserControl
     {
         public AdvancedSettingPage()
         {
             InitializeComponent();
+        }
+
+        private void AdvancedSettingPageBackBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AdvancedSettingPageOKBtn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

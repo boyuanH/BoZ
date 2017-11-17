@@ -18,11 +18,26 @@ namespace BoZPreparation_Tool
     /// <summary>
     /// MapWindowPage.xaml 的交互逻辑
     /// </summary>
+    /// 
+
+    public delegate void MapWindowPageCancelBtnClickDelegate(object sender, EventArgs e);
+    public delegate void MapWindowPageOkBtnClickDelegate(object sender, EventArgs e);
+
     public partial class MapWindowPage : UserControl
     {
         public MapWindowPage()
         {
             InitializeComponent();
+        }
+
+        private void MapWindowPageCancelBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MapWindowPageOKBtn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

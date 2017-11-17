@@ -20,6 +20,22 @@ namespace BoZPreparation_Tool
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        private bool isBirdsViewCreation;
+        private bool isObjectDetection;
+        private bool isDetectionConfirmmation;
+        private bool isHeapMapCreation;
+        private double cameraLocationLongitude;
+        private double cameraLocationlatitude;
+        private double targetLocationLongitude;
+        private double targetLocationlatitude;
+        private string cameraSettingFilePath;
+        private double cameraHeight;
+        private double cameraAngle;
+        private string pictureFolder;
+        private DateTime startTime;
+        private DateTime endTime;
+
         public MainWindow()
         {
             InitializeComponent();

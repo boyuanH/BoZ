@@ -205,12 +205,30 @@ namespace BoZPreparation_Tool {
             return;
             case 11:
             this.PictureSettingPageBackBtn = ((System.Windows.Controls.Button)(target));
+            
+            #line 47 "..\..\PictureSettingPage.xaml"
+            this.PictureSettingPageBackBtn.Click += new System.Windows.RoutedEventHandler(this.PictureSettingPageBackBtn_Click);
+            
+            #line default
+            #line hidden
             return;
             case 12:
             this.PictureSettingPageAdvancedBtn = ((System.Windows.Controls.Button)(target));
+            
+            #line 48 "..\..\PictureSettingPage.xaml"
+            this.PictureSettingPageAdvancedBtn.Click += new System.Windows.RoutedEventHandler(this.PictureSettingPageAdvancedBtn_Click);
+            
+            #line default
+            #line hidden
             return;
             case 13:
             this.PictureSettingPageOkBtn = ((System.Windows.Controls.Button)(target));
+            
+            #line 49 "..\..\PictureSettingPage.xaml"
+            this.PictureSettingPageOkBtn.Click += new System.Windows.RoutedEventHandler(this.PictureSettingPageOkBtn_Click);
+            
+            #line default
+            #line hidden
             return;
             }
             this._contentLoaded = true;
