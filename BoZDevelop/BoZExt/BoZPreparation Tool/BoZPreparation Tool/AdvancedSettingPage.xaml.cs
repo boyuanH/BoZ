@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,8 +24,70 @@ namespace BoZPreparation_Tool
     public delegate void AdvancedSettingPageBackBtnClickDelegate(object sender, EventArgs e);
     public delegate void AdvancedSettingPageOkBtnClickDelegatte(object sender, EventArgs e);
 
-    public partial class AdvancedSettingPage : UserControl
+    public partial class AdvancedSettingPage : UserControl,INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        private bool isBirdsViewCreation = false;
+        public bool IsBirdsViewCreation
+        {
+            get
+            {
+                return isBirdsViewCreation;
+            }
+            set
+            {
+               isBirdsViewCreation = value;
+               OnPropertyChanged("IsBirdsViewCreation");
+            }
+        }
+        private bool isObjectDetection = false;
+        public bool IsObjectDetection
+        {
+            get
+            {
+                return isObjectDetection;
+            }
+            set
+            {
+                isObjectDetection = value;
+                OnPropertyChanged("IsObjectDetection");
+            }
+        }
+        private bool isDetectionConfirmation = false;
+        public bool IsDetectionConfirmation
+        {
+            get
+            {
+                return isDetectionConfirmation;
+            }
+            set
+            {
+                isDetectionConfirmation = value;
+                OnPropertyChanged("IsDetectionConfirmation");
+            }
+        }
+        private bool isHeapMapCreation = false;
+        public bool IsHeapMapCreation
+        {
+            get
+            {
+                return isHeapMapCreation;
+            }
+            set
+            {
+                isHeapMapCreation = value;
+                OnPropertyChanged("IsHeapMapCreation");
+            }
+        }
+
         public AdvancedSettingPage()
         {
             InitializeComponent();

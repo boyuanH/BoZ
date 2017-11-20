@@ -22,7 +22,7 @@
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <Label Name="CameraSettingPageSettingFileLabel"  Padding="20 10" Content="Camera Setting File:" FontSize="16" VerticalAlignment="Center"/>
-                <TextBox Name="CameraSettingPageSettingFileTextBox"    Width="500" Height="30" />
+                <TextBox Name="CameraSettingPageSettingFileTextBox"    Width="500" Height="30" Text="{Binding CameraSettingFilePath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 <Button Name="CameraSettingPageBrowerBtn" Content="Browse" MinWidth="75" Margin="20" FontSize="14"  Height="30" Click="CameraSettingPageBrowerBtn_Click"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
@@ -62,7 +62,7 @@
                                 <Label Content="Longitude:" DockPanel.Dock="Left" FontSize="16" Margin="25 5 0 5"/>
                             </DockPanel>
                             <DockPanel Grid.Column="1" VerticalAlignment="Center">
-                                <TextBox Name="CameraSettingPageCameraLocationLongitude" FontSize="16" Margin="10 5 0 5" MinWidth="50" />
+                                <TextBox Name="CameraSettingPageCameraLocationLongitude" FontSize="16" Margin="10 5 0 5" MinWidth="50" Text="{Binding CameraLocationLongitude, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                             </DockPanel>
                         </Grid>
                         <Grid Grid.Row="2">
@@ -74,7 +74,7 @@
                                 <Label Content="Latitude:" DockPanel.Dock="Left" FontSize="16" Margin="25 5 0 5"/>
                             </DockPanel>
                             <DockPanel Grid.Column="1" VerticalAlignment="Center">
-                                <TextBox Name="CameraSettingPageCameraLocationLatitude" FontSize="16" Margin="10 5 0 5" MinWidth="50" />
+                                <TextBox Name="CameraSettingPageCameraLocationLatitude" FontSize="16" Margin="10 5 0 5" MinWidth="50" Text="{Binding CameraLocationLatitude,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                             </DockPanel>
                         </Grid>
                     </Grid>
@@ -108,7 +108,7 @@
                                 <Label Content="Longitude:" DockPanel.Dock="Left" FontSize="16" Margin="25 5 0 5"/>
                             </DockPanel>
                             <DockPanel Grid.Column="1" VerticalAlignment="Center">
-                                <TextBox Name="CameraSettingPageTargetLocationLongitude" FontSize="16" Margin="10 5 0 5" MinWidth="50" />
+                                <TextBox Name="CameraSettingPageTargetLocationLongitude" FontSize="16" Margin="10 5 0 5" MinWidth="50" Text="{Binding TargetLocationLongitude,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                             </DockPanel>
                         </Grid>
                         <Grid Grid.Row="2">
@@ -120,7 +120,7 @@
                                 <Label Content="Latitude:" DockPanel.Dock="Left" FontSize="16" Margin="25 5 0 5"/>
                             </DockPanel>
                             <DockPanel Grid.Column="1" VerticalAlignment="Center">
-                                <TextBox Name="CameraSettingPageTargetLocationLatitude" FontSize="16" Margin="10 5 0 5" MinWidth="50" />
+                                <TextBox Name="CameraSettingPageTargetLocationLatitude" FontSize="16" Margin="10 5 0 5" MinWidth="50"  Text="{Binding TargetLocationLatitude,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                             </DockPanel>
                         </Grid>
                     </Grid>
@@ -144,7 +144,7 @@
                     <Label DockPanel.Dock="Left" Content="Camera Height From Floor(m)" FontSize="14" Margin="35 0 0 0"/>
                 </DockPanel>
                 <DockPanel VerticalAlignment="Center" Grid.Column="1">
-                    <TextBox Name="CameraSettingPageCameraHeightTextBox" DockPanel.Dock="Left" Margin="5 0 150 0" />
+                    <TextBox Name="CameraSettingPageCameraHeightTextBox" DockPanel.Dock="Left" Margin="5 0 150 0" Text="{Binding CameraHeight,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 </DockPanel>
             </Grid>
             <Grid Grid.Row="2">
@@ -156,7 +156,7 @@
                     <Label DockPanel.Dock="Left" Content="Camera Angle" FontSize="14" Margin="35 0 0 0"/>
                 </DockPanel>
                 <DockPanel VerticalAlignment="Center" Grid.Column="1">
-                    <TextBox Name="CameraSettingPageCameraAngleTextBox" DockPanel.Dock="Left" Margin="5 0 150 0" />
+                    <TextBox Name="CameraSettingPageCameraAngleTextBox" DockPanel.Dock="Left" Margin="5 0 150 0" Text="{Binding CameraAngle,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </DockPanel>
             </Grid>
 

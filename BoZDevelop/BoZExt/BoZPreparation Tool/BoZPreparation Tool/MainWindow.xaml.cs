@@ -23,15 +23,15 @@ namespace BoZPreparation_Tool
 
         private bool isBirdsViewCreation;
         private bool isObjectDetection;
-        private bool isDetectionConfirmmation;
+        private bool isDetectionConfirmation;
         private bool isHeapMapCreation;
-        private double cameraLocationLongitude;
-        private double cameraLocationlatitude;
-        private double targetLocationLongitude;
-        private double targetLocationlatitude;
+        private string cameraLocationLongitude;
+        private string cameraLocationLatitude;
+        private string targetLocationLongitude;
+        private string targetLocationLatitude;
         private string cameraSettingFilePath;
-        private double cameraHeight;
-        private double cameraAngle;
+        private string cameraHeight;
+        private string cameraAngle;
         private string pictureFolder;
         private DateTime startTime;
         private DateTime endTime;

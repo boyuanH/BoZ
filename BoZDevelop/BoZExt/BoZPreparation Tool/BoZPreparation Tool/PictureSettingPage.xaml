@@ -20,27 +20,35 @@
             <Label Padding="30 5" Name="PictureSettingPageTitleLabel" FontSize="42" FontWeight="Bold" Content="Picture Setting" VerticalAlignment="Center"/>
         </StackPanel>
         <DockPanel Grid.Row="1"  VerticalAlignment="Center">     
-            <Label Content="Picture Folder:" Padding="25 5 20 5"/>
-            <Button Name="PictureSettingPageFictureFolderSelectBtn" DockPanel.Dock="Right" MaxWidth="100" MinWidth="50" Content="Browser"  Margin="20 5 35 5 "/>
+            <Label Content="Picture Folder:" FontWeight="Bold" VerticalContentAlignment="Center" FontSize="18" Padding="25 0 20 0"/>
+            <Button Name="PictureSettingPageFictureFolderSelectBtn" DockPanel.Dock="Right" MaxWidth="100" MinWidth="50" FontSize="18" Content="Browser"  Margin="20 5 35 5 "/>
             <TextBox Name="PictureSettingPagePictureFolderTextBox" DockPanel.Dock="Right"  Margin="5 5 5 5" />
         </DockPanel>
         <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right">
             <Button Name="PictureSettingPageFictureFolderSetBtn"  Content="Set" MaxWidth="80" MinWidth="50" Margin="400 10 35 10"/>
         </StackPanel>
-        <StackPanel Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Center">
-            <Label Content="Start Time" FontWeight="Bold" FontSize="14" Margin="30 5 5 5" />
+        <StackPanel Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Center" Margin=" 0 5 0 5">
+            <Label Content="Start Time" FontWeight="Bold" MinWidth="140" FontSize="24" Margin="30 5 5 5" />
             <TextBox Name="StartTimeHourTextbox" MinWidth="35"/>
-            <Label Content=":" />
+            <Viewbox VerticalAlignment="Center" Margin="10 5 10 5">
+                <TextBlock VerticalAlignment="Center" Text=":" FontWeight="Bold" />
+            </Viewbox>
             <TextBox Name="StartTimeMinuteTextbox" MinWidth="35"/>
-            <Label Content=":" />
+            <Viewbox VerticalAlignment="Center" Margin="10 5 10 5">
+                <TextBlock VerticalAlignment="Center" Text=":" FontWeight="Bold" />
+            </Viewbox>
             <TextBox Name="StartTimeSecondTextbox" MinWidth="35"/>
         </StackPanel>
-        <StackPanel Grid.Row="5" Orientation="Horizontal" VerticalAlignment="Center">
-            <Label Content="End   Time" FontWeight="Bold" FontSize="14" Margin="30 5 5 5"/>
+        <StackPanel Grid.Row="5" Orientation="Horizontal" VerticalAlignment="Center" Margin=" 0 5 0 5">
+            <Label Content="End   Time" FontWeight="Bold" MinWidth="140" FontSize="24" Margin="30 5 5 5"/>
             <TextBox Name="EndTimeHourTextbox" MinWidth="35"/>
-            <Label Content=":" />
+            <Viewbox VerticalAlignment="Center" Margin="10 5 10 5">
+                <TextBlock VerticalAlignment="Center" Text=":" FontWeight="Bold" />
+            </Viewbox>
             <TextBox Name="EndTimeMinuteTextbox" MinWidth="35"/>
-            <Label Content=":" />
+            <Viewbox VerticalAlignment="Center" Margin="10 5 10 5">
+                <TextBlock VerticalAlignment="Center" Text=":" FontWeight="Bold" />
+            </Viewbox>
             <TextBox Name="EndTimeSecondTextbox" MinWidth="35"/>
         </StackPanel>
         <StackPanel Grid.Row="7" Orientation="Horizontal" Margin=" 0 15 0 15" HorizontalAlignment="Right">

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,8 +24,31 @@ namespace BoZPreparation_Tool
     public delegate void PictureSettingPageAdvancedBtnClickDelegate(object sender, EventArgs e);
     public delegate void PictureSettingPageOkBtnClickDelegate(object sender, EventArgs e);
     public delegate void PictureSettingPageBackBtnClickDelegate(object sender, EventArgs e);
-    public partial class PictureSettingPage : UserControl
+    public partial class PictureSettingPage : UserControl,INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        private string pictureFolder;
+        public string PictureFolder
+        {
+            get
+            {
+                return pictureFolder;
+            }
+            set
+            {
+                pictureFolder = value;
+                OnPropertyChanged("PictureFolder");
+            }
+        }
+
         public PictureSettingPage()
         {
             InitializeComponent();

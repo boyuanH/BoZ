@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,8 +22,115 @@ namespace BoZPreparation_Tool
     /// 
     public delegate void CameraSettingPageNextBtnClickDelegate(object sender, EventArgs e);
 
-    public partial class CameraSettingPage : UserControl
+    public partial class CameraSettingPage : UserControl, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        private string cameraLocationLongitude;
+        public string CameraLocationLongitude
+        {
+            get
+            {
+                return cameraLocationLongitude;
+            }
+            set
+            {
+                cameraLocationLongitude = value;
+                OnPropertyChanged("CameraLocationLongitude");
+            }
+        }
+
+        private string cameraLocationLatitude;
+        public string CameraLocationLatitude
+        {
+            get
+            {
+                return cameraLocationLatitude;
+            }
+            set
+            {
+                cameraLocationLatitude = value;
+                OnPropertyChanged("CameraLocationLatitude");
+            }
+        }
+
+        private string targetLocationLongitude;
+        public string TargetLocationLongitude
+        {
+            get
+            {
+                return targetLocationLongitude;
+            }
+            set
+            {
+                targetLocationLongitude = value;
+                OnPropertyChanged("TargetLocationLongitude");
+            }
+        }
+
+        private string targetLocationLatitude;
+        public string TargetLocationLatitude
+        {
+            get
+            {
+                return targetLocationLatitude;
+            }
+            set
+            {
+                targetLocationLatitude = value;
+                OnPropertyChanged("TargetLocationLatitude");
+            }
+        }
+
+        private string cameraSettingFilePath;
+        public string CameraSettingFilePath
+        {
+            get
+            {
+                return cameraSettingFilePath;
+            }
+            set
+            {
+                cameraSettingFilePath = value;
+                OnPropertyChanged("CameraSettingFilePath");
+            }
+        }
+
+        private string cameraHeight;
+        public string CameraHeight
+        {
+            get
+            {
+                return cameraHeight;
+            }
+            set
+            {
+                cameraHeight = value;
+                OnPropertyChanged("CameraHeight");
+            }
+        }
+
+        private string cameraAngle;
+        public string CameraAngle
+        {
+            get
+            {
+                return cameraAngle;
+            }
+            set
+            {
+                cameraAngle = value;
+                OnPropertyChanged("CameraAngle");
+            }
+        }
+
         public CameraSettingPage()
         {
             InitializeComponent();
