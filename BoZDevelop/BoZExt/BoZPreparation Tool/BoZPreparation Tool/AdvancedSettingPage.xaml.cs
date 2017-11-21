@@ -27,6 +27,9 @@ namespace BoZPreparation_Tool
     public partial class AdvancedSettingPage : UserControl,INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        public event AdvancedSettingPageBackBtnClickDelegate AdvancedSettingPageBackBtnClickEvent;
+        public event AdvancedSettingPageOkBtnClickDelegatte AdvancedSettingPageOkBtnClickEvent;
+
         public void OnPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
@@ -95,12 +98,18 @@ namespace BoZPreparation_Tool
 
         private void AdvancedSettingPageBackBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            if(AdvancedSettingPageBackBtnClickEvent != null)
+            {
+                AdvancedSettingPageBackBtnClickEvent(this, e);
+            }
         }
 
         private void AdvancedSettingPageOKBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            if(AdvancedSettingPageOkBtnClickEvent != null)
+            {
+                AdvancedSettingPageOkBtnClickEvent(this, e);
+            }
         }
     }
 }

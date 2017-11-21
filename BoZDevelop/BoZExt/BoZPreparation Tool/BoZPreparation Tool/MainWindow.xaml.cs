@@ -33,8 +33,12 @@ namespace BoZPreparation_Tool
         private string cameraHeight;
         private string cameraAngle;
         private string pictureFolder;
-        private DateTime startTime;
-        private DateTime endTime;
+        private string startHour = "0";
+        private string startMinute = "0";
+        private string startSecond = "0";
+        private string endHour = "0";
+        private string endMinute = "0";
+        private string endSecond = "0";
 
         public MainWindow()
         {

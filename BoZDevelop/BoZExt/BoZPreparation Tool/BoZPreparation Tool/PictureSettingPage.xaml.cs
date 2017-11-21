@@ -27,6 +27,10 @@ namespace BoZPreparation_Tool
     public partial class PictureSettingPage : UserControl,INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        public event PictureSettingPageAdvancedBtnClickDelegate PictureSettingPageAdvancedBtnClickEvent;
+        public event PictureSettingPageBackBtnClickDelegate PictureSettingPageBackBtnClickEvent;
+        public event PictureSettingPageOkBtnClickDelegate PictureSettingPageOkBtnClickEvent;
+
         public void OnPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
@@ -49,6 +53,90 @@ namespace BoZPreparation_Tool
             }
         }
 
+        private string startHour;
+        public string StartHour
+        {
+            get
+            {
+                return startHour;
+            }
+            set
+            {
+                startHour = value;
+                OnPropertyChanged("StartHour");
+            }
+        }
+
+        private string startMinute;
+        public string StartMinute
+        {
+            get
+            {
+                return startMinute;
+            }
+            set
+            {
+                startMinute = value;
+                OnPropertyChanged("StartMinute");
+            }
+        }
+
+        private string startSecond;
+        public string StartSecond
+        {
+            get
+            {
+                return startSecond;
+            }
+            set
+            {
+                startSecond = value;
+                OnPropertyChanged("StartSecond");
+            }
+        }
+
+        private string endHour;
+        public string EndHour
+        {
+            get
+            {
+                return endHour;
+            }
+            set
+            {
+                endHour = value;
+                OnPropertyChanged("EndHour");
+            }
+        }
+
+        private string endMinute;
+        public string EndMinute
+        {
+            get
+            {
+                return endMinute;
+            }
+            set
+            {
+                endMinute = value;
+                OnPropertyChanged("EndMinute");
+            }
+        }
+
+        private string endSecond;
+        public string EndSecond
+        {
+            get
+            {
+                return endSecond;
+            }
+            set
+            {
+                endSecond = value;
+                OnPropertyChanged("EndSecond");
+            }
+        }
+
         public PictureSettingPage()
         {
             InitializeComponent();
@@ -56,17 +144,26 @@ namespace BoZPreparation_Tool
 
         private void PictureSettingPageAdvancedBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            if(PictureSettingPageAdvancedBtnClickEvent != null)
+            {
+                PictureSettingPageAdvancedBtnClickEvent(this, e);
+            }
         }
 
         private void PictureSettingPageBackBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            if (PictureSettingPageBackBtnClickEvent != null)
+            {
+                PictureSettingPageBackBtnClickEvent(this, e);
+            }
         }
 
         private void PictureSettingPageOkBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            if (PictureSettingPageOkBtnClickEvent != null)
+            {
+                PictureSettingPageOkBtnClickEvent(this, e);
+            }
         }
     }
 }

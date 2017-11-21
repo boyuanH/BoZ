@@ -28,28 +28,28 @@
             <Button Name="PictureSettingPageFictureFolderSetBtn"  Content="Set" MaxWidth="80" MinWidth="50" Margin="400 10 35 10"/>
         </StackPanel>
         <StackPanel Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Center" Margin=" 0 5 0 5">
-            <Label Content="Start Time" FontWeight="Bold" MinWidth="140" FontSize="24" Margin="30 5 5 5" />
-            <TextBox Name="StartTimeHourTextbox" MinWidth="35"/>
+            <Label Content="Start Time" VerticalContentAlignment="Center" FontWeight="Bold" MinWidth="140" FontSize="24" Margin="30 5 5 5" />
+            <TextBox Name="StartTimeHourTextbox" MinWidth="35" Text="{Binding StartHour,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
             <Viewbox VerticalAlignment="Center" Margin="10 5 10 5">
                 <TextBlock VerticalAlignment="Center" Text=":" FontWeight="Bold" />
             </Viewbox>
-            <TextBox Name="StartTimeMinuteTextbox" MinWidth="35"/>
+            <TextBox Name="StartTimeMinuteTextbox" MinWidth="35" Text="{Binding StartMinute,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
             <Viewbox VerticalAlignment="Center" Margin="10 5 10 5">
                 <TextBlock VerticalAlignment="Center" Text=":" FontWeight="Bold" />
             </Viewbox>
-            <TextBox Name="StartTimeSecondTextbox" MinWidth="35"/>
+            <TextBox Name="StartTimeSecondTextbox" MinWidth="35" Text="{Binding StartSecond,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
         <StackPanel Grid.Row="5" Orientation="Horizontal" VerticalAlignment="Center" Margin=" 0 5 0 5">
-            <Label Content="End   Time" FontWeight="Bold" MinWidth="140" FontSize="24" Margin="30 5 5 5"/>
-            <TextBox Name="EndTimeHourTextbox" MinWidth="35"/>
+            <Label Content="End   Time" VerticalContentAlignment="Center" FontWeight="Bold" MinWidth="140" FontSize="24" Margin="30 5 5 5"/>
+            <TextBox Name="EndTimeHourTextbox" MinWidth="35" Text="{Binding EndHour,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
             <Viewbox VerticalAlignment="Center" Margin="10 5 10 5">
                 <TextBlock VerticalAlignment="Center" Text=":" FontWeight="Bold" />
             </Viewbox>
-            <TextBox Name="EndTimeMinuteTextbox" MinWidth="35"/>
+            <TextBox Name="EndTimeMinuteTextbox" MinWidth="35" Text="{Binding EndMinute,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
             <Viewbox VerticalAlignment="Center" Margin="10 5 10 5">
                 <TextBlock VerticalAlignment="Center" Text=":" FontWeight="Bold" />
             </Viewbox>
-            <TextBox Name="EndTimeSecondTextbox" MinWidth="35"/>
+            <TextBox Name="EndTimeSecondTextbox" MinWidth="35" Text="{Binding EndSecond,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
         <StackPanel Grid.Row="7" Orientation="Horizontal" Margin=" 0 15 0 15" HorizontalAlignment="Right">
             <Button Name="PictureSettingPageBackBtn" MinWidth="80" Margin="10 0 10 0" Content="Back" Click="PictureSettingPageBackBtn_Click" />
