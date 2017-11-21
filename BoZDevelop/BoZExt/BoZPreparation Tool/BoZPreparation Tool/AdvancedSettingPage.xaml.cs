@@ -32,10 +32,7 @@ namespace BoZPreparation_Tool
 
         public void OnPropertyChanged(string propertyName)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private bool isBirdsViewCreation = false;
@@ -98,18 +95,12 @@ namespace BoZPreparation_Tool
 
         private void AdvancedSettingPageBackBtn_Click(object sender, RoutedEventArgs e)
         {
-            if(AdvancedSettingPageBackBtnClickEvent != null)
-            {
-                AdvancedSettingPageBackBtnClickEvent(this, e);
-            }
+            AdvancedSettingPageBackBtnClickEvent?.Invoke(this, e);
         }
 
         private void AdvancedSettingPageOKBtn_Click(object sender, RoutedEventArgs e)
         {
-            if(AdvancedSettingPageOkBtnClickEvent != null)
-            {
-                AdvancedSettingPageOkBtnClickEvent(this, e);
-            }
+            AdvancedSettingPageOkBtnClickEvent?.Invoke(this, e);
         }
     }
 }

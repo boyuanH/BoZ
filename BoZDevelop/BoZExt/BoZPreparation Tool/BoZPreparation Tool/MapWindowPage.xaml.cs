@@ -29,10 +29,7 @@ namespace BoZPreparation_Tool
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged(string propertyName)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private string mapLongitude;
@@ -48,6 +45,7 @@ namespace BoZPreparation_Tool
                 OnPropertyChanged("MapLongitude");
             }
         }
+
         private string mapLatitude;
         public string MapLatitude
         {

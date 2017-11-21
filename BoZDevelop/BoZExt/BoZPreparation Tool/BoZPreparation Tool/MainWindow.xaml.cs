@@ -40,12 +40,44 @@ namespace BoZPreparation_Tool
         private string endMinute = "0";
         private string endSecond = "0";
 
+        CameraSettingPage cameraSettingPage = new CameraSettingPage();
+        PictureSettingPage pictureSettingPage = new PictureSettingPage();
+        AdvancedSettingPage advancedSettingPage = new AdvancedSettingPage();
+
         public MainWindow()
         {
             InitializeComponent();
             pageTransitionControl.TransitionType = WpfPageTransitions.PageTransitionType.SlideAndFade;
-            CameraSettingPage camerasettingPage = new CameraSettingPage();
-            pageTransitionControl.ShowPage(camerasettingPage);
+            pageTransitionControl.ShowPage(cameraSettingPage);
+            cameraSettingPage.CameraSettingPageNextBtnClickEvent += new CameraSettingPageNextBtnClickDelegate(ShowPictureSettingPage);
+            pictureSettingPage.PictureSettingPageAdvancedBtnClickEvent += new PictureSettingPageAdvancedBtnClickDelegate(ShowAdvancedSettingPage);
+            pictureSettingPage.PictureSettingPageBackBtnClickEvent += new PictureSettingPageBackBtnClickDelegate(ShowCameraSettingPage);
+            pictureSettingPage.PictureSettingPageOkBtnClickEvent += new PictureSettingPageOkBtnClickDelegate(ShowProcessingPage);
+            advancedSettingPage.AdvancedSettingPageBackBtnClickEvent += new AdvancedSettingPageBackBtnClickDelegate(ShowPictureSettingPage);
+            advancedSettingPage.AdvancedSettingPageOkBtnClickEvent += new AdvancedSettingPageOkBtnClickDelegatte(ShowProcessingPage);
         }
+
+        public void ShowCameraSettingPage(object sender, EventArgs e)
+        {
+            pageTransitionControl.ShowPage(cameraSettingPage);
+        }
+
+        public void ShowPictureSettingPage(object sender, EventArgs e)
+        {
+            pageTransitionControl.ShowPage(pictureSettingPage);
+        }
+
+        public void ShowAdvancedSettingPage(object sender, EventArgs e)
+        {
+            pageTransitionControl.ShowPage(advancedSettingPage);
+        }
+
+        public void ShowProcessingPage(object sender,EventArgs e)
+        {
+            Processing processingPage = new Processing();
+            pageTransitionControl.ShowPage(processingPage);
+        }
+
+
     }
 }

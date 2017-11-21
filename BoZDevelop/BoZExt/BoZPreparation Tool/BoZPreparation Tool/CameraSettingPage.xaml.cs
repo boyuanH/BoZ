@@ -21,23 +21,16 @@ namespace BoZPreparation_Tool
     /// </summary>
     /// 
     public delegate void CameraSettingPageNextBtnClickDelegate(object sender, EventArgs e);
-    public delegate void CameraSettingPageSettingFileLoadBtnClickDelegate(object sender, EventArgs e);
-    public delegate void CameraSettingPageSaveBtnClickDelegate(object sender, EventArgs e);
 
 
     public partial class CameraSettingPage : UserControl, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public event CameraSettingPageNextBtnClickDelegate CameraSettingPageNextBtnClickEvent;
-        public event CameraSettingPageSettingFileLoadBtnClickDelegate CameraSettingPageSettingFileLoadBtnClickEvent;
-        public event CameraSettingPageSaveBtnClickDelegate CameraSettingPageSaveBtnClickEvent;
 
         public void OnPropertyChanged(string propertyName)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private string cameraLocationLongitude;
@@ -145,10 +138,7 @@ namespace BoZPreparation_Tool
 
         private void CameraSettingPageNextBtn_Click(object sender, RoutedEventArgs e)
         {
-            if(CameraSettingPageNextBtnClickEvent != null)
-            {
-                CameraSettingPageNextBtnClickEvent(this, e);
-            }
+            CameraSettingPageNextBtnClickEvent?.Invoke(this, e);
         }
 
         private void CameraSettingPageBrowerBtn_Click(object sender, RoutedEventArgs e)
@@ -158,18 +148,10 @@ namespace BoZPreparation_Tool
 
         private void CameraSettingPageSettingFileLoadBtn_Click(object sender, RoutedEventArgs e)
         {
-            if(CameraSettingPageSettingFileLoadBtnClickEvent != null)
-            {
-                CameraSettingPageSettingFileLoadBtnClickEvent(this, e);
-            }
         }
 
         private void CameraSettingPageSettingFileSaveBtn_Click(object sender, RoutedEventArgs e)
         {
-            if(CameraSettingPageSaveBtnClickEvent != null)
-            {
-                CameraSettingPageSaveBtnClickEvent(this, e);
-            }
         }
 
         private void CameraSettingPageCameraLocationShowmapBtn_Click(object sender, RoutedEventArgs e)
