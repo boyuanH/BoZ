@@ -61,7 +61,7 @@ namespace BoZPreparation_Tool
         }
 
 
-        public MapWindowPage()
+        public MapWindowPage(double longitude,double latitude)
         {
             InitializeComponent();
         }
