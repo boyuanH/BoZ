@@ -21,19 +21,23 @@ namespace BoZPreparation_Tool
     /// </summary>
     /// 
     public delegate void CameraSettingPageNextBtnClickDelegate(object sender, EventArgs e);
+    public delegate void CameraSettingPageShowMapBtnClickDelegate(object sender, RoutedEventArgs e);
+
 
 
     public partial class CameraSettingPage : UserControl, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public event CameraSettingPageNextBtnClickDelegate CameraSettingPageNextBtnClickEvent;
+        public event CameraSettingPageShowMapBtnClickDelegate CameraSettingPageShowMapBtnClickEvent;
+
 
         public void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private string cameraLocationLongitude;
+        private string cameraLocationLongitude = "0.0000";
         public string CameraLocationLongitude
         {
             get
@@ -47,7 +51,7 @@ namespace BoZPreparation_Tool
             }
         }
 
-        private string cameraLocationLatitude;
+        private string cameraLocationLatitude = "0.0000";
         public string CameraLocationLatitude
         {
             get
@@ -61,7 +65,7 @@ namespace BoZPreparation_Tool
             }
         }
 
-        private string targetLocationLongitude;
+        private string targetLocationLongitude = "0.0000";
         public string TargetLocationLongitude
         {
             get
@@ -75,7 +79,7 @@ namespace BoZPreparation_Tool
             }
         }
 
-        private string targetLocationLatitude;
+        private string targetLocationLatitude = "0.0000";
         public string TargetLocationLatitude
         {
             get
@@ -156,11 +160,12 @@ namespace BoZPreparation_Tool
 
         private void CameraSettingPageCameraLocationShowmapBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            CameraSettingPageShowMapBtnClickEvent?.Invoke(this, e);
         }
 
         private void CameraSettingPageTargetLocationShowmapBtn_Click(object sender, RoutedEventArgs e)
         {
+            CameraSettingPageShowMapBtnClickEvent?.Invoke(this, e);
 
         }
     }

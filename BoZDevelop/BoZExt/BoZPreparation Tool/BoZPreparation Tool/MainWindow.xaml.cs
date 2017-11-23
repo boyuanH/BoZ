@@ -43,6 +43,7 @@ namespace BoZPreparation_Tool
         CameraSettingPage cameraSettingPage = new CameraSettingPage();
         PictureSettingPage pictureSettingPage = new PictureSettingPage();
         AdvancedSettingPage advancedSettingPage = new AdvancedSettingPage();
+        MapWindowPage mapWindowPage = new MapWindowPage();
 
         public MainWindow()
         {
@@ -50,11 +51,15 @@ namespace BoZPreparation_Tool
             pageTransitionControl.TransitionType = WpfPageTransitions.PageTransitionType.SlideAndFade;
             pageTransitionControl.ShowPage(cameraSettingPage);
             cameraSettingPage.CameraSettingPageNextBtnClickEvent += new CameraSettingPageNextBtnClickDelegate(ShowPictureSettingPage);
+            cameraSettingPage.CameraSettingPageShowMapBtnClickEvent += new CameraSettingPageShowMapBtnClickDelegate(ShowMap);
             pictureSettingPage.PictureSettingPageAdvancedBtnClickEvent += new PictureSettingPageAdvancedBtnClickDelegate(ShowAdvancedSettingPage);
             pictureSettingPage.PictureSettingPageBackBtnClickEvent += new PictureSettingPageBackBtnClickDelegate(ShowCameraSettingPage);
             pictureSettingPage.PictureSettingPageOkBtnClickEvent += new PictureSettingPageOkBtnClickDelegate(ShowProcessingPage);
             advancedSettingPage.AdvancedSettingPageBackBtnClickEvent += new AdvancedSettingPageBackBtnClickDelegate(ShowPictureSettingPage);
             advancedSettingPage.AdvancedSettingPageOkBtnClickEvent += new AdvancedSettingPageOkBtnClickDelegatte(ShowProcessingPage);
+            mapWindowPage.MapWindowPageCancelBtnClickEvent += new MapWindowPageCancelBtnClickDelegate(ShowCameraSettingPage);
+            mapWindowPage.MapWindowPageOkBtnClickEvent += new MapWindowPageOkBtnClickDelegate(ShowCameraSettingPage);
+            
         }
 
         public void ShowCameraSettingPage(object sender, EventArgs e)
@@ -76,6 +81,12 @@ namespace BoZPreparation_Tool
         {
             Processing processingPage = new Processing();
             pageTransitionControl.ShowPage(processingPage);
+        }
+
+        public void ShowMap(object sender, RoutedEventArgs e)
+        {
+            //mapWindowPage.SetCoordinate();
+            pageTransitionControl.ShowPage(mapWindowPage);
         }
 
 

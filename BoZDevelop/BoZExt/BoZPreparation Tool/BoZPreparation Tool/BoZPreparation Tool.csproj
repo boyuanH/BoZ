@@ -93,6 +93,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MapCoordinateRoutedEventArgs.cs" />
     <Compile Include="MapWindowPage.xaml.cs">
       <DependentUpon>MapWindowPage.xaml</DependentUpon>
     </Compile>

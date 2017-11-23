@@ -26,6 +26,9 @@ namespace BoZPreparation_Tool
 
     public partial class MapWindowPage : UserControl,INotifyPropertyChanged
     {
+        public event MapWindowPageCancelBtnClickDelegate MapWindowPageCancelBtnClickEvent;
+        public event MapWindowPageOkBtnClickDelegate MapWindowPageOkBtnClickEvent;
+
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged(string propertyName)
         {
@@ -41,7 +44,7 @@ namespace BoZPreparation_Tool
             }
             set
             {
-                mapLatitude = MapLongitude;
+                mapLongitude = value;
                 OnPropertyChanged("MapLongitude");
             }
         }
@@ -61,19 +64,26 @@ namespace BoZPreparation_Tool
         }
 
 
-        public MapWindowPage(double longitude,double latitude)
+        public MapWindowPage()
         {
             InitializeComponent();
+            SetCoordinate("0", "0");
+        }
+
+        public void SetCoordinate(string longitude, string latitude)
+        {
+            MapLongitude = longitude.ToString();
+            MapLatitude = latitude.ToString();
         }
 
         private void MapWindowPageCancelBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            MapWindowPageCancelBtnClickEvent?.Invoke(this, e);
         }
 
         private void MapWindowPageOKBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            MapWindowPageOkBtnClickEvent?.Invoke(this, e);
         }
     }
 }
