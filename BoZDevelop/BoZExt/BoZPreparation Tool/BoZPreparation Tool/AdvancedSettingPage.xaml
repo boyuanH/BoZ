@@ -29,10 +29,10 @@
         </StackPanel>
         <StackPanel Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="45 0 0 0">
             <CheckBox Name="AdvancedSettingPageHeatMapCreationCheckBtn" Content="Heap Map creation" FontSize="24" IsChecked="{Binding IsHeapMapCreation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        </StackPanel> 
-        <StackPanel Grid.Row="6" Margin="0 0 35 0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
-            <Button Name="AdvancedSettingPageBackBtn" MinWidth="65" Margin="15 0 20 0" Content="Back" FontSize="16" Click="AdvancedSettingPageBackBtn_Click" />
-            <Button Name="AdvancedSettingPageOKBtn" MinWidth="65" Margin="15 0 15 0" Content="OK" FontSize="16" Click="AdvancedSettingPageOKBtn_Click" />
+        </StackPanel>
+        <StackPanel Grid.Row="6" Height="50" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+            <Button Name="AdvancedSettingPageBackBtn" MinWidth="80" Margin="15 0 20 0" Content="Back" FontSize="16" Click="AdvancedSettingPageBackBtn_Click" />
+            <Button Name="AdvancedSettingPageOKBtn" MinWidth="80" Margin="15 0 15 0" Content="OK" FontSize="16" Click="AdvancedSettingPageOKBtn_Click" />
         </StackPanel>
     </Grid>
 </UserControl>

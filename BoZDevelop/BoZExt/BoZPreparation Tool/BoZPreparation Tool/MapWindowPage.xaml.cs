@@ -68,6 +68,7 @@ namespace BoZPreparation_Tool
         {
             InitializeComponent();
             SetCoordinate("0", "0");
+            this.DataContext = this;
         }
 
         public void SetCoordinate(string longitude, string latitude)
@@ -84,6 +85,31 @@ namespace BoZPreparation_Tool
         private void MapWindowPageOKBtn_Click(object sender, RoutedEventArgs e)
         {
             MapWindowPageOkBtnClickEvent?.Invoke(this, e);
+        }
+
+        private void CallIniWriterToWriteParameters(string fileName,Dictionary<string,string> paras)
+        {
+
+        }
+
+        private void CallBirdsView()
+        {
+
+        }
+
+        private void CallDCD()
+        {
+
+        }
+
+        private void CallLRU3D()
+        {
+
+        }
+
+        private void CallHeatmap()
+        {
+
         }
     }
 }

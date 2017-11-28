@@ -91,6 +91,7 @@ namespace BoZPreparation_Tool
         public AdvancedSettingPage()
         {
             InitializeComponent();
+            this.DataContext = this;
         }
 
         private void AdvancedSettingPageBackBtn_Click(object sender, RoutedEventArgs e)

@@ -1,0 +1,12 @@
+﻿################################################################################
+# 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
+################################################################################
+
+/BoZDevelop/BoZExt/BoZPreparation Tool/bin/AnalyzeStereo
+/BoZDevelop/BoZExt/BoZPreparation Tool/bin/BoZPreparation Tool.exe
+/BoZDevelop/BoZExt/BoZPreparation Tool/bin/WpfPageTransitions.pdb
+/BoZDevelop/BoZExt/BoZPreparation Tool/bin/WpfPageTransitions.dll
+/BoZDevelop/BoZExt/BoZPreparation Tool/bin/BoZPreparation Tool.pdb
+/BoZDevelop/BoZExt/BoZPreparation Tool/WpfPageTransitions/obj/Debug
+/BoZDevelop/BoZExt/BoZPreparation Tool/BoZPreparation Tool/obj/Debug
+/BoZDevelop/BoZExt/BoZPreparation Tool/bin/License

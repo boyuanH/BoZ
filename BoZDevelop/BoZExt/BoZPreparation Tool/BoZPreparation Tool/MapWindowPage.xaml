@@ -26,11 +26,11 @@
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center">
                         <Label Content="Longitude(°)" FontSize="16" Margin="25 5 5 5" MinWidth="110"/>
-                        <TextBox Name="MapWindowPageLongitudeTextBox" Margin="5" MinWidth="160" Text="{Binding MapLongitude,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Name="MapWindowPageLongitudeTextBox" Margin="5" MinWidth="160" VerticalContentAlignment="Center" Text="{Binding MapLongitude,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
                     <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
                         <Label Content="Latitude(°)" FontSize="16" Margin="25 5 5 5" MinWidth="110"/>
-                        <TextBox Name="MapWindowPageLatitudeTextBox" Margin="5" MinWidth="160" Text="{Binding MapLatitude,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Name="MapWindowPageLatitudeTextBox" Margin="5" MinWidth="160" VerticalContentAlignment="Center" Text="{Binding MapLatitude,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
                 </Grid>
             </Grid>

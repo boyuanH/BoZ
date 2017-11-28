@@ -9,17 +9,17 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
             <RowDefinition Height="3*" />
-            <RowDefinition Height="2*" />
+            <RowDefinition Height="3*" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>     
         <StackPanel  Grid.Row="0" VerticalAlignment="Center">
-            <Label FontWeight="Black" FontSize="24" Margin="20 5 35 5" Content="Processing" />
+            <Label FontWeight="Black" FontSize="42" Margin="30 5 35 5" Content="Processing" />
         </StackPanel>
         <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Label FontSize="14" Content="Processing, Please Wait..." />
+            <Label FontSize="24" Content="Processing, Please Wait..." />
         </StackPanel>
-        <StackPanel Grid.Row="3" HorizontalAlignment="Right">
-            <Button Content="OK" Name="ProcessingPageOKBtn" MinWidth="45" Margin="5 5 30 5" />
+        <StackPanel Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal" Height="50" >
+            <Button Content="OK" Name="ProcessingPageOKBtn"  FontSize="16" MinWidth="80" Margin="5 0 30 0" />
         </StackPanel>
     </Grid>
 </UserControl>

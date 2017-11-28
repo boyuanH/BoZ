@@ -161,8 +161,8 @@
             </Grid>
 
         </Grid>
-        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="15 10 60 15">
-            <Button Name="CameraSettingPageNextBtn"  Padding="5" Content="Next" MinWidth="70" FontSize="16" Click="CameraSettingPageNextBtn_Click"/>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Height="50">
+            <Button Name="CameraSettingPageNextBtn"  Padding="5" Content="Next" MinWidth="80" VerticalAlignment="Stretch" FontSize="16" Click="CameraSettingPageNextBtn_Click"/>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -24,7 +26,7 @@ namespace BoZPreparation_Tool
     public delegate void PictureSettingPageAdvancedBtnClickDelegate(object sender, EventArgs e);
     public delegate void PictureSettingPageOkBtnClickDelegate(object sender, EventArgs e);
     public delegate void PictureSettingPageBackBtnClickDelegate(object sender, EventArgs e);
-    public partial class PictureSettingPage : UserControl,INotifyPropertyChanged
+    public partial class PictureSettingPage : System.Windows.Controls.UserControl, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public event PictureSettingPageAdvancedBtnClickDelegate PictureSettingPageAdvancedBtnClickEvent;
@@ -140,6 +142,7 @@ namespace BoZPreparation_Tool
         public PictureSettingPage()
         {
             InitializeComponent();
+            this.DataContext = this;
         }
 
         private void PictureSettingPageAdvancedBtn_Click(object sender, RoutedEventArgs e)
@@ -163,6 +166,35 @@ namespace BoZPreparation_Tool
             if (PictureSettingPageOkBtnClickEvent != null)
             {
                 PictureSettingPageOkBtnClickEvent(this, e);
+            }
+        }
+
+        private void PictureSettingPageFictureFolderSelectBtn_Click(object sender, RoutedEventArgs e)
+        {
+            FolderBrowserDialog folder_dialog = new FolderBrowserDialog();
+            DialogResult result = folder_dialog.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.Cancel)
+            {
+                return;
+            }
+            PictureFolder = folder_dialog.SelectedPath.Trim();
+        }
+        
+        private void PictureSettingPageFictureFolderSetBtn_Click(object sender, RoutedEventArgs e)
+        {
+            string path = PictureSettingPagePictureFolderTextBox.Text.Trim();
+            if (!string.IsNullOrWhiteSpace(path))
+            {
+                DirectoryInfo directoryInfo = new DirectoryInfo(path);
+                if (directoryInfo.Exists)
+                {
+                    pictureFolder = directoryInfo.FullName;
+                    System.Windows.MessageBox.Show("Picture Folder Set","BoZ Info");
+                }
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show("Please Input Correct Directory Path");
+                }
             }
         }
     }

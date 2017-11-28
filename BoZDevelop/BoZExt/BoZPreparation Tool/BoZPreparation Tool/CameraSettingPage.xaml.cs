@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -25,7 +26,7 @@ namespace BoZPreparation_Tool
 
 
 
-    public partial class CameraSettingPage : UserControl, INotifyPropertyChanged
+    public partial class CameraSettingPage : System.Windows.Controls.UserControl, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public event CameraSettingPageNextBtnClickDelegate CameraSettingPageNextBtnClickEvent;
@@ -138,6 +139,7 @@ namespace BoZPreparation_Tool
         public CameraSettingPage()
         {
             InitializeComponent();
+            this.DataContext = this;
         }
 
         private void CameraSettingPageNextBtn_Click(object sender, RoutedEventArgs e)
@@ -147,7 +149,13 @@ namespace BoZPreparation_Tool
 
         private void CameraSettingPageBrowerBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            FolderBrowserDialog folder_dialog = new FolderBrowserDialog();
+            DialogResult result = folder_dialog.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.Cancel)
+            {
+                return;
+            }
+            CameraSettingFilePath = folder_dialog.SelectedPath.Trim();
         }
 
         private void CameraSettingPageSettingFileLoadBtn_Click(object sender, RoutedEventArgs e)
