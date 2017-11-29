@@ -87,29 +87,6 @@ namespace BoZPreparation_Tool
             MapWindowPageOkBtnClickEvent?.Invoke(this, e);
         }
 
-        private void CallIniWriterToWriteParameters(string fileName,Dictionary<string,string> paras)
-        {
 
-        }
-
-        private void CallBirdsView()
-        {
-
-        }
-
-        private void CallDCD()
-        {
-
-        }
-
-        private void CallLRU3D()
-        {
-
-        }
-
-        private void CallHeatmap()
-        {
-
-        }
     }
 }
