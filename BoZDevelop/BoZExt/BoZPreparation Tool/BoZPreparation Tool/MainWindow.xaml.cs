@@ -49,6 +49,11 @@ namespace BoZPreparation_Tool
         BackgroundWorker worker = null;
 
         private string strTempDir;
+        private string strSaveRecogResultDir;
+        private string strLRUResultsCsvFilename;
+        private string UnstableAreaDetectionDir;
+        private string UnstableSoftName;
+        private string CaptureRawDataDir;
 
         public MainWindow()
         {
@@ -65,6 +70,8 @@ namespace BoZPreparation_Tool
             mapWindowPage.MapWindowPageCancelBtnClickEvent += new MapWindowPageCancelBtnClickDelegate(ShowCameraSettingPage);
             mapWindowPage.MapWindowPageOkBtnClickEvent += new MapWindowPageOkBtnClickDelegate(ShowCameraSettingPage);
             worker = new BackgroundWorker();
+            UnstableAreaDetectionDir = @"./DCD";
+            UnstableSoftName = @"DCD.exe";
         }
 
         public void ShowCameraSettingPage(object sender, EventArgs e)
@@ -84,8 +91,11 @@ namespace BoZPreparation_Tool
 
         public void ShowProcessingPage(object sender,EventArgs e)
         {
+            CaptureRawDataDir = pictureSettingPage.PictureFolder;
             DirectoryInfo directoryInfo = new DirectoryInfo(pictureSettingPage.PictureFolder);
-            strTempDir = System.IO.Path.Combine(directoryInfo.Parent.FullName, directoryInfo.Name + "_Results");
+            strTempDir = System.IO.Path.Combine(directoryInfo.Parent.FullName, directoryInfo.Name + @"_Results");
+            strSaveRecogResultDir = System.IO.Path.Combine(strTempDir, @"Recognition");
+            strLRUResultsCsvFilename = System.IO.Path.Combine(strSaveRecogResultDir, @"LRUResult_"+BoZConstant.nStartFrameNo+@"_"+BoZConstant.ProcessingFrameNum+@".csv");
             Processing processingPage = new Processing();
             pageTransitionControl.ShowPage(processingPage);
             CallBirdsView();
@@ -120,16 +130,42 @@ namespace BoZPreparation_Tool
 
         private void CallBirdsView()
         {
+            //Set BirdView.ini
             Dictionary<string, string> birdsPara = new Dictionary<string, string>();
             birdsPara.Add(BoZConstant.BirdViewConfigPara_CameraHeight, cameraSettingPage.CameraHeight);
             birdsPara.Add(BoZConstant.BirdViewConfigPara_CameraPitch, cameraSettingPage.CameraAngle);
-            birdsPara.Add(BoZConstant.BirdViewConfigPara_StartFrameNo,"1");
-            birdsPara.Add(BoZConstant.BirdViewConfigPara_ProcessingFrameNum, "1200");
-            birdsPara.Add(BoZConstant.BirdViewConfigPara_ObjInfo,"1");
+            birdsPara.Add(BoZConstant.BirdViewConfigPara_StartFrameNo, BoZConstant.nStartFrameNo);
+            birdsPara.Add(BoZConstant.BirdViewConfigPara_ProcessingFrameNum, BoZConstant.ProcessingFrameNum);
+            birdsPara.Add(BoZConstant.BirdViewConfigPara_ObjInfo, "1");
             birdsPara.Add(BoZConstant.BirdViewConfigPara_SaveDataPath, strTempDir);
             birdsPara.Add(BoZConstant.BirdViewConfigPara_FrameSkipNum, "1");
             CallIniWriterToWriteParameters(BoZConstant.BirdViewConfigFile, birdsPara);
-            //Set BirdView.ini
+
+            if (advancedSettingPage.IsBirdsViewCreation == true)
+            {
+                ProcessStartInfo processInfo = new ProcessStartInfo("BirdsView.exe", @" " + CaptureRawDataDir);
+                processInfo.CreateNoWindow = false;
+                processInfo.UseShellExecute = false;
+                processInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                processInfo.RedirectStandardOutput = true;
+                Process birdViewProcess = Process.Start(processInfo);
+                birdViewProcess.WaitForExit();
+
+                string path = System.IO.Path.Combine(UnstableAreaDetectionDir, "data", "matched", "matched");
+                string pattern = "*.png";
+                string[] strFileName = Directory.GetFiles(path, pattern);
+                foreach (var item in strFileName)
+                {
+                    File.Delete(item);
+                }
+                string copyresultExePara = @" -org "+ strTempDir + @"\umap -dst "+UnstableAreaDetectionDir +@"\data\matched\train -mode 1 -nStartFrameNo " + BoZConstant.nStartFrameNo +@" -nFrameNum "+BoZConstant.ProcessingFrameNum;
+                ProcessStartInfo processCopyResultsInfo = new ProcessStartInfo(BoZConstant.CopyResultsExe, @" " + CaptureRawDataDir);
+                processInfo.CreateNoWindow = false;
+                processInfo.UseShellExecute = false;
+
+            }
+
+
         }
 
         private void CallDCD()

@@ -8,6 +8,10 @@ namespace BoZPreparation_Tool
 {
     public class BoZConstant
     {
+        public static string nStartFrameNo = "1";
+        public static string ProcessingFrameNum = "1200";
+
+
         public static string BirdViewConfigFile = @"BirdsView.ini";
         public static string LRU3DConfigFile = @"Param_3DPos.ini";
         public static string BirdViewConfigPara_CameraHeight        = @"CameraHeight ";
@@ -27,7 +31,7 @@ namespace BoZPreparation_Tool
         public static string LRU3DConfigPara_RawImageDataDir = @"RawImageDataDir";
         public static string LRU3DConfigPara_SaveDataPath = @"SaveDataPath";
 
-
+        public static string CopyResultsExe = "CopyResults.exe";
 
     }
 }
