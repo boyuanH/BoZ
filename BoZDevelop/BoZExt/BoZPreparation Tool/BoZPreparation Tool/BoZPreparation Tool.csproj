@@ -74,6 +74,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BoZConstant.cs" />
+    <Compile Include="BozTask.cs" />
     <Compile Include="CameraSettingPage.xaml.cs">
       <DependentUpon>CameraSettingPage.xaml</DependentUpon>
     </Compile>
